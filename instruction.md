@@ -1,6 +1,6 @@
 # Instruksi PPWL12-FE-Clone
 Brief:
-1. Tiap anggota meng-cloning UI/UX 1 halaman sub page dari website utama yang diberikan ke tim. Cth: Team Web `https://www.kokbisa.id/`. Dari web utama tiap anggota handle halaman khusus: anggota 1 (Home - https://www.kokbisa.id/), anggota 2 (langganan - https://www.kokbisa.id/langganan), dst.
+1. Cloning UI/UX beberapa halaman yang diberikan oleh Asdos. Halaman tersebut dari website yang sama. Cloning menggunakan AI yang dijelaskan di instruksi di bawah. 
 2. Menggunakan template repo ini sebagai base, dengan Stack React-TS+TailwindCSS. Target proyek ini untuk melatih mahasiswa dalam mendesain UI menggunakan TailwindCSS & memanfaatkan state di React (untuk interaksi seperti transition carousel, popup, dsb). 
 3. Deploy web ke InfinityFree, dengan alur: `GitHub (branch 'main' berubah) → (GitHub Actions build pakai Bun + Vite) → upload /dist → InfinityFree (via FTP)`. Jadi mahasiswa juga belajar rule branch protection, github action (CI/CD), pull request & git merging, & koneksi FTP.
 
@@ -141,6 +141,4 @@ Kita akan menggunakan AI dalam web development, terutama untuk generate template
     - CSS terintegrasi dalam 1 file `index.css`
     - Rapikan repo, hapus file atau kode yang tidak digunakan.
 - Nilai Personel: 
-    - Kemiripan UI dengan referensi Asli. 
-    - Struktur UI yang lebih kompleks dibanding anggota lain. Penggunaan custom CSS.
-    - Terdapat State khusus yang lebih kompleks dibanding anggota lain.
+    - Perbaikan UI dari komponenen yang rusak. Terutama jika struktur UI yang lebih kompleks dibanding anggota lain (Cth: terdapat State khusus yang lebih kompleks dibanding anggota lain).
