@@ -75,7 +75,7 @@ Lihat file `.github\workflow\deploy.yml`. Pada dasarnya file ini adalah konfigur
 - Apa proses dalam *jobs* tersebut lakukan?
     1. *uses* template `actions/checkout@v4` & `oven-sh/setup-bun@v1` untuk checkout ke repo dan install ubuntu. 
     2. pakai bebrapa *step* manual: *install dependency*, build, & test.
-    3. Terakhir, *uses* template koneksi FPT `SamKirkland/FTP-Deploy-Action@v4.3.4`, dengan parameter untuk koneksi dan target path. 
+    3. Terakhir, *uses* template koneksi FPT `SamKirkland/FTP-Deploy-Action@v4.3.4`, dengan parameter untuk koneksi dan target path.
 **Betul!** File ini konsepnya hampir mirip dengan Dockerfile. 
 
 #### **[2] File (vite.config.ts)**
@@ -129,6 +129,7 @@ Kita akan menggunakan AI dalam web development, terutama untuk generate template
 	- ketika anda generate, akan ada opsi generate, pilih "Clone All" untuk clone 1 halaman full.
 	- Kode akan dibangun pakai next.js, jadi anda perlu ganti elemen next.js jadi pakai React biasa.
 	- Anda perlu salin kode manual 1 per satu ke local (karena "download sekaligus" masih dalam fitur pro).
+ - **✨Tips:** Pisahkan kode komponen dari kode pages (masukkan ke `components/`), agar tiap komponen dapat dikerjakan 1 orang saja. Dengan begitu, jika ada merging, tidak akan ada kendala *merge conflict*. 
 > Liat [video tips cloing web](https://drive.google.com/file/d/1OH6GrTbvOacRhNob79uRn1jD7QF2o-In/view?usp=drive_link) ini sebagai referensi dalam cloning website nya.
 
 ## 4. Final
