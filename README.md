@@ -11,11 +11,11 @@ Kelas Praktikum Pemograman Web Lanjut 2026 (Sistem Informasi/UNTAN). Minggu ke-1
 
 Main Web: [kokbisa.id](https://www.kokbisa.id/)
 
-|        Name       |    NIM     | Reference Page |
-|-------------------|------------|----------------|
-| Leo Prangs Tobing | H110124000 | [Page1-Home](https://www.kokbisa.id/) |
-| Other             | H110124000 | [Page1-Home](https://www.kokbisa.id/) |
-| Other             | H110124000 | [Page1-Home](https://www.kokbisa.id/) |
-| Other             | H110124000 | [Page2-Langganan](https://www.kokbisa.id/langganan) |
-| Other             | H110124000 | [Page2-Langganan](https://www.kokbisa.id/langganan) |
-| Other             | H110124000 | [Page2-Langganan](https://www.kokbisa.id/langganan) |
+|        Name       |    NIM     | Reference Page | Spesific Component |
+|-------------------|------------|----------------|--------------------|
+| Leo Prangs Tobing | H110124000 | [Page1-Home](https://www.kokbisa.id/) | Navbar, Header Carousel |
+| Other             | H110124000 | [Page1-Home](https://www.kokbisa.id/) | Main |
+| Other             | H110124000 | [Page1-Home](https://www.kokbisa.id/) | Footer |
+| Other             | H110124000 | [Page2-Langganan](https://www.kokbisa.id/langganan) | Title Area |
+| Other             | H110124000 | [Page2-Langganan](https://www.kokbisa.id/langganan) | Form Area |
+| Other             | H110124000 | [Page2-Langganan](https://www.kokbisa.id/langganan) | Button Area |
