@@ -28,7 +28,7 @@ Main Web: https://www.airbnb.co.id/
 
 ### Home Page
 
-- Navbar & Footer → (Nama Kamu)
+- Navbar & Footer → Rafli Pratama
 - Listing Section → Bagas
 - Listing Card → Adel (Adella)
 
