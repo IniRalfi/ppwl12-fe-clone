@@ -1,3 +1,4 @@
+import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AppWrapper from "./components/AppWrapper";
 import Navbar from "./components/Navbar";
@@ -7,12 +8,15 @@ import Footer from "./components/Footer";
 import { useScrolled } from "./hooks/useScrolled";
 import type { ActivePanel } from "./types/search";
 
-function App() {
+// Komponen Testing yang mau kamu buat (import ini nanti setelah file-nya dibuat ya)
+import ComponentTesting from "./pages/ComponentTesting";
+
+// Pisahkan halaman awalmu menjadi function Home
+function Home() {
   const isScrolled = useScrolled();
   const [forceExpanded, setForceExpanded] = useState(false);
   const [triggerPanel, setTriggerPanel] = useState<ActivePanel>(null);
 
-  // Jika scroll alami kembali ke atas, matikan mode forceExpanded
   useEffect(() => {
     if (!isScrolled) {
       setForceExpanded(false);
@@ -22,8 +26,8 @@ function App() {
   const effectiveScrolled = isScrolled && !forceExpanded;
 
   const handleCompactClick = (panel: ActivePanel) => {
-    setForceExpanded(true); // paksa tampilan jadi "belum scroll"
-    setTriggerPanel(panel); // buka panel di SearchBar
+    setForceExpanded(true);
+    setTriggerPanel(panel);
   };
 
   return (
@@ -38,6 +42,16 @@ function App() {
       <ComingSoon />
       <Footer type="home" />
     </AppWrapper>
+  );
+}
+
+// Gunakan App sebagai Router utama
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/testing" element={<ComponentTesting />} />
+    </Routes>
   );
 }
 
