@@ -45,7 +45,12 @@ export default function Navbar({ isScrolled, onSectionClick }: NavbarProps) {
   };
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-50 bg-white border-b border-[#DDDDDD]">
+    <header
+      ref={headerRef}
+      className={`sticky top-0 z-50 bg-white transition-all duration-300 ${
+        isScrolled ? "border-b border-[#DDDDDD] shadow-sm" : ""
+      }`}
+    >
       {/* ════ DESKTOP ════ */}
       <div className="hidden md:grid max-w-[1760px] mx-auto px-6 md:px-10 lg:px-20 grid-cols-3 items-center h-20">
         {/* Kolom 1: Logo */}

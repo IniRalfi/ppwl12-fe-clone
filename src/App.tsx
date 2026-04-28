@@ -27,7 +27,7 @@ function App() {
   };
 
   return (
-    <AppWrapper scale={1}>
+    <AppWrapper scale={0.85}>
       <Navbar isScrolled={effectiveScrolled} onSectionClick={handleCompactClick} />
       <SearchBar
         forceExpanded={forceExpanded}
