@@ -126,8 +126,8 @@ export default function DatePanel({ dateRange, onChange, onDone }: DatePanelProp
             const isToday = isSameDay(date, today);
 
             // Background range highlight (full width baris, kecuali ujung)
-            const rangeLeft = isInRange || isTo;
-            const rangeRight = isInRange || isFrom;
+            // const rangeLeft = isInRange || isTo;
+            // const rangeRight = isInRange || isFrom;
 
             return (
               <div
