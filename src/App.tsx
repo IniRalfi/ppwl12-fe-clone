@@ -1,19 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Page1 from './pages/Page1';
-import Page2 from './pages/Page2';
-import PageExample from './pages/PageExample';
-import Navbar from './components/Navbar';
+import AppWrapper from "./components/AppWrapper";
+import Navbar from "./components/Navbar";
+import SearchBar from "./components/SearchBar";
+import ComingSoon from "./components/ComingSoon";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Page1 />} />
-          <Route path="/page-2" element={<Page2 />} />
-          <Route path="/page-example" element={<PageExample />} />
-        </Routes>
-    </Router>
+    // 1 = normal | 0.9 = lebih kecil | 1.1 = lebih besar
+    <AppWrapper scale={1}>
+      <Navbar />
+      <SearchBar />
+      <ComingSoon />
+      <Footer />
+    </AppWrapper>
   );
 }
 
