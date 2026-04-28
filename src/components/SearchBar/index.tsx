@@ -5,26 +5,48 @@ import LocationPanel from "./LocationPanel";
 import DatePanel from "./DatePanel";
 import GuestPanel from "./GuestPanel";
 
-export default function SearchBar() {
+interface SearchBarProps {
+  forceExpanded?: boolean;
+  triggerPanel?: ActivePanel;
+  onPanelTriggered?: () => void;
+  onClose?: () => void;
+}
+
+export default function SearchBar({
+  forceExpanded,
+  triggerPanel,
+  onPanelTriggered,
+  onClose,
+}: SearchBarProps) {
   const [activePanel, setActivePanel] = useState<ActivePanel>(null);
   const [location, setLocation] = useState("");
   const [dateRange, setDateRange] = useState<DateRange>({ from: null, to: null });
   const [guests, setGuests] = useState<GuestCount>({ adults: 0, children: 0, infants: 0, pets: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Buka panel dari luar (compact pill klik)
+  useEffect(() => {
+    if (triggerPanel) {
+      setActivePanel(triggerPanel);
+      onPanelTriggered?.();
+    }
+  }, [triggerPanel]);
+
   // Tutup panel kalau klik di luar
   useEffect(() => {
     function handleOutsideClick(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setActivePanel(null);
+        if (forceExpanded && onClose) {
+          onClose(); // Kembali ke compact kalau klik di luar
+        }
       }
     }
     document.addEventListener("mousedown", handleOutsideClick);
     return () => document.removeEventListener("mousedown", handleOutsideClick);
-  }, []);
+  }, [forceExpanded, onClose]);
 
   const isExpanded = activePanel !== null;
-
   const formatDate = (d: Date | null) =>
     d ? d.toLocaleDateString("id-ID", { day: "numeric", month: "short" }) : null;
 
@@ -51,19 +73,18 @@ export default function SearchBar() {
 
   const labelClass = (panel: Exclude<ActivePanel, null>) =>
     `text-xs font-semibold leading-none mb-0.5 transition-colors ${
-      !isExpanded || activePanel === panel ? "text-[#222222]" : "text-[#AAAAAA]"
+      !isExpanded || activePanel === panel ? "text-hof" : "text-[#AAAAAA]"
     }`;
 
   const valueClass = (panel: Exclude<ActivePanel, null>, hasValue: boolean) =>
     `text-sm truncate transition-colors ${
       !isExpanded || activePanel === panel
         ? hasValue
-          ? "text-[#222222]"
+          ? "text-hof"
           : "text-[#717171]"
         : "text-[#AAAAAA]"
     }`;
 
-  // Helper buat panel wrapper — selalu render, toggle visibilitas via CSS
   const panelWrapperClass = (panel: ActivePanel, extra = "") =>
     `absolute top-full mt-3 z-50 transition-all duration-200 ease-out ${extra} ${
       activePanel === panel
@@ -72,10 +93,13 @@ export default function SearchBar() {
     }`;
 
   return (
-    // sticky di bawah Navbar (h-20 = 5rem), biar popup tidak ikut scroll
-    <div className="sticky top-20 z-40 w-full bg-white border-b border-[#DDDDDD] py-3">
+    // forceExpanded → sticky di bawah Navbar meski halaman sudah discroll
+    <div
+      className={`hidden md:block w-full bg-white border-b border-[#DDDDDD] py-3 ${
+        forceExpanded ? "sticky top-20 z-40" : ""
+      }`}
+    >
       <div ref={containerRef} className="relative max-w-2xl mx-auto px-4">
-        {/* Bar Utama */}
         <div
           className={`flex items-center rounded-full border transition-all duration-200 ${
             isExpanded
@@ -83,7 +107,6 @@ export default function SearchBar() {
               : "border-[#DDDDDD] shadow-sm hover:shadow-md bg-white"
           }`}
         >
-          {/* Lokasi */}
           <button
             type="button"
             onClick={() => toggle("location")}
@@ -99,7 +122,6 @@ export default function SearchBar() {
             <div className="w-px h-7 bg-[#DDDDDD] shrink-0" />
           )}
 
-          {/* Kapan */}
           <button
             type="button"
             onClick={() => toggle("date")}
@@ -115,12 +137,21 @@ export default function SearchBar() {
             <div className="w-px h-7 bg-[#DDDDDD] shrink-0" />
           )}
 
-          {/* Peserta + Search */}
-          <div className="flex items-center pr-2">
+          <div
+            className={`flex items-center pr-2 rounded-full transition-all duration-200 ${
+              activePanel === "guests" ? "bg-white shadow-md" : ""
+            }`}
+          >
             <button
               type="button"
               onClick={() => toggle("guests")}
-              className={sectionClass("guests")}
+              className={`flex flex-col items-start px-6 py-3 rounded-full transition-all cursor-pointer ${
+                activePanel === "guests"
+                  ? ""
+                  : isExpanded
+                    ? "hover:bg-[#EBEBEB]"
+                    : "hover:bg-[#F7F7F7]"
+              }`}
             >
               <span className={labelClass("guests")}>Peserta</span>
               <span className={valueClass("guests", !!guestLabel)}>
@@ -129,33 +160,38 @@ export default function SearchBar() {
             </button>
             <button
               type="button"
-              className="btn-rausch w-12 h-12 rounded-full flex items-center justify-center shrink-0"
+              className={`btn-rausch rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ease-out ${
+                activePanel === "guests" ? "gap-2 pl-5 pr-6 h-12" : "w-12 h-12"
+              }`}
               aria-label="Cari"
             >
               <Search className="w-5 h-5 text-white" />
+              <span
+                className={`text-white text-sm font-semibold whitespace-nowrap overflow-hidden transition-all duration-300 ease-out ${
+                  activePanel === "guests" ? "max-w-[60px] opacity-100" : "max-w-0 opacity-0"
+                }`}
+              >
+                Cari
+              </span>
             </button>
           </div>
         </div>
 
-        {/* ── Panel Lokasi ── selalu render, animasi CSS */}
         <div className={panelWrapperClass("location", "left-0 right-0")}>
-          <div className="bg-white rounded-[1.5rem] shadow-2xl border border-[#DDDDDD]">
+          <div className="bg-white rounded-3xl shadow-2xl border border-[#DDDDDD]">
             <LocationPanel
               value={location}
               onChange={(val) => {
                 setLocation(val);
-                // geser ke date, JANGAN tutup
                 setActivePanel("date");
               }}
             />
           </div>
         </div>
-
-        {/* ── Panel Tanggal ── lebih lebar, di-center */}
         <div
           className={panelWrapperClass("date", "left-1/2 -translate-x-1/2 w-[720px] max-w-[95vw]")}
         >
-          <div className="bg-white rounded-[1.5rem] shadow-2xl border border-[#DDDDDD]">
+          <div className="bg-white rounded-3xl shadow-2xl border border-[#DDDDDD]">
             <DatePanel
               dateRange={dateRange}
               onChange={setDateRange}
@@ -163,10 +199,8 @@ export default function SearchBar() {
             />
           </div>
         </div>
-
-        {/* ── Panel Peserta ── rata kanan */}
         <div className={panelWrapperClass("guests", "right-0 w-80")}>
-          <div className="bg-white rounded-[1.5rem] shadow-2xl border border-[#DDDDDD]">
+          <div className="bg-white rounded-3xl shadow-2xl border border-[#DDDDDD]">
             <GuestPanel guests={guests} onChange={setGuests} />
           </div>
         </div>
