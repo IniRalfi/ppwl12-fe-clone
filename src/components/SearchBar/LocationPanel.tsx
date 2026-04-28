@@ -22,11 +22,11 @@ export default function LocationPanel({ value, onChange }: LocationPanelProps) {
         placeholder="Cari destinasi"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-full px-4 py-3 mb-4 border border-[#DDDDDD] rounded-full text-sm text-[#222222] placeholder:text-[#717171] outline-none focus:border-[#222222] transition-colors"
+        className="w-full px-4 py-3 mb-4 border border-[#DDDDDD] rounded-full text-sm text-hof placeholder:text-[#717171] outline-none focus:border-hof transition-colors"
       />
 
       {/* List destinasi */}
-      <p className="text-xs font-semibold text-[#222222] px-2 mb-3">Destinasi yang disarankan</p>
+      <p className="text-xs font-semibold text-hof px-2 mb-3">Destinasi yang disarankan</p>
       <ul className="space-y-1 max-h-80 overflow-y-auto">
         {filtered.map((dest) => (
           <li key={dest.id}>
@@ -41,7 +41,7 @@ export default function LocationPanel({ value, onChange }: LocationPanelProps) {
               </div>
               {/* Teks */}
               <div>
-                <p className="text-sm font-semibold text-[#222222]">{dest.name}</p>
+                <p className="text-sm font-semibold text-hof">{dest.name}</p>
                 <p className="text-sm text-[#717171] leading-snug">{dest.description}</p>
               </div>
             </button>

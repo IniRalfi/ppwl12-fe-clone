@@ -97,7 +97,7 @@ export default function DatePanel({ dateRange, onChange, onDone }: DatePanelProp
 
     return (
       <div className="flex-1 min-w-0">
-        <p className="text-center text-sm font-semibold text-[#222222] mb-5">
+        <p className="text-center text-sm font-semibold text-hof mb-5">
           {MONTHS_ID[month]} {year}
         </p>
         {/* Header hari */}
@@ -148,11 +148,11 @@ export default function DatePanel({ dateRange, onChange, onDone }: DatePanelProp
                     ${isPast ? "text-[#CCCCCC] cursor-not-allowed" : "cursor-pointer"}
                     ${
                       isFrom || isTo
-                        ? "bg-[#222222] text-white font-semibold"
+                        ? "bg-hof text-white font-semibold"
                         : isToday
-                          ? "font-bold text-[#222222] hover:border hover:border-[#222222]"
+                          ? "font-bold text-hof hover:border hover:border-hof"
                           : !isPast
-                            ? "text-[#222222] hover:border hover:border-[#222222]"
+                            ? "text-hof hover:border hover:border-hof"
                             : ""
                     }
                   `}
@@ -179,8 +179,8 @@ export default function DatePanel({ dateRange, onChange, onDone }: DatePanelProp
               onClick={() => setMode(m)}
               className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 capitalize ${
                 mode === m
-                  ? "bg-white shadow text-[#222222]"
-                  : "text-[#717171] hover:text-[#222222]"
+                  ? "bg-white shadow text-hof"
+                  : "text-[#717171] hover:text-hof"
               }`}
             >
               {m === "tanggal" ? "Tanggal" : "Fleksibel"}
@@ -216,12 +216,12 @@ export default function DatePanel({ dateRange, onChange, onDone }: DatePanelProp
           type="button"
           onClick={() => setSelecting("from")}
           className={`flex-1 border rounded-xl px-4 py-3 text-left transition-colors ${
-            selecting === "from" ? "border-[#222222]" : "border-[#DDDDDD] hover:border-[#AAAAAA]"
+            selecting === "from" ? "border-hof" : "border-[#DDDDDD] hover:border-[#AAAAAA]"
           }`}
         >
           <p className="text-xs text-[#717171] font-semibold mb-0.5">Check-in</p>
           <div className="flex items-center justify-between">
-            <p className="text-sm text-[#222222]">{formatDate(dateRange.from)}</p>
+            <p className="text-sm text-hof">{formatDate(dateRange.from)}</p>
             <span className="text-[#717171] text-xs">⌄</span>
           </div>
         </button>
@@ -229,12 +229,12 @@ export default function DatePanel({ dateRange, onChange, onDone }: DatePanelProp
           type="button"
           onClick={() => setSelecting("to")}
           className={`flex-1 border rounded-xl px-4 py-3 text-left transition-colors ${
-            selecting === "to" ? "border-[#222222]" : "border-[#DDDDDD] hover:border-[#AAAAAA]"
+            selecting === "to" ? "border-hof" : "border-[#DDDDDD] hover:border-[#AAAAAA]"
           }`}
         >
           <p className="text-xs text-[#717171] font-semibold mb-0.5">Check-out</p>
           <div className="flex items-center justify-between">
-            <p className="text-sm text-[#222222]">{formatDate(dateRange.to)}</p>
+            <p className="text-sm text-hof">{formatDate(dateRange.to)}</p>
             <span className="text-[#717171] text-xs">⌄</span>
           </div>
         </button>
