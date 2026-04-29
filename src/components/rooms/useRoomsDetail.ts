@@ -1,8 +1,8 @@
-// src/components/listing/useListingDetail.ts
+// src/components/rooms/useRoomsDetail.ts
 import { useState, useMemo } from "react";
 import type { Review } from "../../types/review";
 
-export function useListingDetail() {
+export function useRoomsDetail() {
   const [startDate, setStartDate] = useState<number | null>(null);
   const [endDate, setEndDate] = useState<number | null>(null);
   const [selecting, setSelecting] = useState<"checkin" | "checkout">("checkin");

@@ -17,11 +17,11 @@ import { homesData } from "./data/homesData";
 import { experiencesData } from "./data/experiencesData";
 import { servicesData } from "./data/servicesData";
 
-// --- IMPORT COMPONENT LISTING DETAIL ---
-import ListingDetail from "./components/listing";
-import ImageGalleryComponent from "./components/listing/ImageGallery";
-import { listingImages } from "./data/listingImages";
-import StickyTabs from "./components/listing/StickyTabs";
+// --- IMPORT COMPONENT ROOMS DETAIL ---
+import RoomsDetail from "./components/rooms";
+import ImageGalleryComponent from "./components/rooms/ImageGallery";
+import { roomsImages } from "./data/roomsImages";
+import StickyTabs from "./components/rooms/StickyTabs";
 
 // Halaman Utama (Home)
 function Home() {
@@ -76,13 +76,13 @@ function Home() {
   );
 }
 
-// Halaman Detail Listing
+// Halaman Detail Rooms
 
-function ListingPage() {
+function RoomsPage() {
   const [forceExpanded, setForceExpanded] = useState(false);
   const galleryRef = useRef<HTMLDivElement>(null);
 
-  // Di listing: default compact, expand kalau diklik
+  // Di rooms: default compact, expand kalau diklik
   const effectiveScrolled = !forceExpanded;
 
   return (
@@ -103,8 +103,8 @@ function ListingPage() {
       )}
 
       <StickyTabs galleryRef={galleryRef} />
-      <ImageGalleryComponent ref={galleryRef} images={listingImages} />
-      <ListingDetail />
+      <ImageGalleryComponent ref={galleryRef} images={roomsImages} />
+      <RoomsDetail />
 
       <div className="mt-16">
         <Footer type="detail" />
@@ -118,8 +118,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      {/* <Route path="/testing" element={<ComponentTesting />} /> */}
-      <Route path="/listing/:id" element={<ListingPage />} />
+      <Route path="/rooms/:id" element={<RoomsPage />} />
     </Routes>
   );
 }

@@ -1,4 +1,4 @@
-// src/components/listing/ListingDescription.tsx
+// src/components/rooms/RoomsDescription.tsx
 import { useState } from "react";
 
 const highlights = [
@@ -31,7 +31,7 @@ const highlights = [
   },
 ];
 
-const ListingDescription = () => {
+const RoomsDescription = () => {
   const [expanded, setExpanded] = useState(false);
 
   const shortDesc = `Nikmati akomodasi mewah di jantung Kuala Lumpur. Unit ini sempurna untuk keluarga atau grup besar dengan kapasitas hingga 12 tamu. Dilengkapi dengan 3 kamar tidur yang nyaman, kolam renang eksklusif, dan lokasi strategis dekat pusat perbelanjaan serta atraksi wisata utama.`;
@@ -69,4 +69,4 @@ const ListingDescription = () => {
   );
 };
 
-export default ListingDescription;
+export default RoomsDescription;

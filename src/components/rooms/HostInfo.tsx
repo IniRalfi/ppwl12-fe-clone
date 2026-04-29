@@ -1,4 +1,4 @@
-// src/components/listing/HostInfo.tsx
+// src/components/rooms/HostInfo.tsx
 
 const HostInfo = () => {
   return (

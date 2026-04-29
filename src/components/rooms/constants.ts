@@ -1,4 +1,4 @@
-// src/components/listing/constants.ts
+// src/components/rooms/constants.ts
 
 export const MONTHS = [
   "Januari",

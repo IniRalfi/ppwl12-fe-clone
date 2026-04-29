@@ -1,4 +1,4 @@
-// src/components/listing/ListingInfoExtra.tsx
+// src/components/rooms/RoomsInfoExtra.tsx
 
 const INFO_SECTIONS = [
   {
@@ -61,7 +61,7 @@ const INFO_SECTIONS = [
   },
 ];
 
-const ListingInfoExtra = () => {
+const RoomsInfoExtra = () => {
   return (
     <section className="py-10 border-t border-gray-200">
       <h2 className="text-2xl font-semibold text-gray-900 mb-8">Hal yang perlu diketahui</h2>
@@ -88,4 +88,4 @@ const ListingInfoExtra = () => {
   );
 };
 
-export default ListingInfoExtra;
+export default RoomsInfoExtra;

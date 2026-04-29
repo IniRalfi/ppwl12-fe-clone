@@ -1,8 +1,8 @@
-// src/components/listing/ImageGallery.tsx
+// src/components/rooms/ImageGallery.tsx
 import { useState, forwardRef } from "react";
-import type { ListingImageProps } from "@/types/listing";
+import type { RoomsImageProps } from "@/types/rooms";
 
-const ImageGallery = forwardRef<HTMLDivElement, ListingImageProps>(function ImageGallery(
+const ImageGallery = forwardRef<HTMLDivElement, RoomsImageProps>(function ImageGallery(
   { images },
   ref,
 ) {

@@ -1,4 +1,4 @@
-// src/components/listing/Amenities.tsx
+// src/components/rooms/Amenities.tsx
 import { useState } from "react";
 
 const amenities = [

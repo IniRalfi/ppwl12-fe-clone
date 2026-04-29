@@ -1,23 +1,23 @@
-// src/components/listing/index.tsx
-import { useListingDetail } from "./useListingDetail";
+// src/components/rooms/index.tsx — main entry (RoomsDetail)
+import { useRoomsDetail } from "./useRoomsDetail";
 import { MONTHS } from "./constants";
 
 import HostInfo from "./HostInfo";
-import ListingDescription from "./ListingDescription";
+import RoomsDescription from "./RoomsDescription";
 import Amenities from "./Amenities";
 import BookingCard from "./BookingCard";
 import DatePickerSection from "./DatePicker";
 import { ReviewSummary } from "./ReviewSummary";
 import { ReviewList } from "./ReviewList";
 import { ReviewModal } from "./ReviewModal";
-import ListingMap from "./ListingMap";
+import RoomsMap from "./RoomsMap";
 import HostProfile from "./HostProfile";
-import ListingInfoExtra from "./ListingInfoExtra";
-import NearbyListings from "./NearbyListings";
+import RoomsInfoExtra from "./RoomsInfoExtra";
+import NearbyRooms from "./NearbyRooms";
 
 import { reviews, reviewTags, reviewSummaryData } from "../../data/reviewsData";
 
-const ListingDetail = () => {
+const RoomsDetail = () => {
   const {
     startDate,
     endDate,
@@ -38,7 +38,7 @@ const ListingDetail = () => {
     handleShowAllReviews,
     handleCloseModal,
     handleReviewClick,
-  } = useListingDetail();
+  } = useRoomsDetail();
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 font-sans">
@@ -74,7 +74,7 @@ const ListingDetail = () => {
       <div className="flex flex-col lg:flex-row gap-12 mt-6">
         <div className="flex-1 min-w-0">
           <HostInfo />
-          <ListingDescription />
+          <RoomsDescription />
           <Amenities />
           <div
             id="date-section"
@@ -132,10 +132,10 @@ const ListingDetail = () => {
       </div>
 
       {/* Bagian Bagas */}
-      <ListingMap />
+      <RoomsMap />
       <HostProfile />
-      <ListingInfoExtra />
-      <NearbyListings />
+      <RoomsInfoExtra />
+      <NearbyRooms />
 
       {/* Modal Review */}
       {isModalOpen && (
@@ -151,4 +151,4 @@ const ListingDetail = () => {
   );
 };
 
-export default ListingDetail;
+export default RoomsDetail;

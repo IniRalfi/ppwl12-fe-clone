@@ -1,6 +1,6 @@
-// src/components/listing/ListingMap.tsx
+// src/components/rooms/RoomsMap.tsx
 
-const ListingMap = () => {
+const RoomsMap = () => {
   return (
     <section className="py-10 border-t border-gray-200">
       <h2 className="text-2xl font-semibold text-gray-900 mb-2">Lokasi Anda</h2>
@@ -23,4 +23,4 @@ const ListingMap = () => {
   );
 };
 
-export default ListingMap;
+export default RoomsMap;

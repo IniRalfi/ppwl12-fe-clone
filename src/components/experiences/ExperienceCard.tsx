@@ -10,8 +10,8 @@ export default function ExperienceCard({ data }: Props) {
   const [isFav, setIsFav] = useState(data.isFavorite ?? false);
 
   return (
-    // Pake Link biar pindah halaman otomatis ke /listing/ID
-    <Link to={`/listing/${data.id}`} className="w-44 shrink-0 cursor-pointer group block">
+    // Pake Link biar pindah halaman otomatis ke /rooms/ID
+    <Link to={`/rooms/${data.id}`} className="w-44 shrink-0 cursor-pointer group block">
       {/* Gambar */}
       <div className="relative rounded-2xl overflow-hidden aspect-square">
         <img

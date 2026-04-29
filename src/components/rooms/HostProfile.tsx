@@ -1,4 +1,4 @@
-// src/components/listing/HostProfile.tsx
+// src/components/rooms/HostProfile.tsx
 
 const HOST = {
   name: "Sue",

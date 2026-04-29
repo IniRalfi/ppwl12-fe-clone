@@ -1,4 +1,4 @@
-// src/components/listing/DatePicker.tsx
+// src/components/rooms/DatePicker.tsx
 
 interface DatePickerProps {
   nights: number;

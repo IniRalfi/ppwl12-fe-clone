@@ -1,4 +1,4 @@
-// src/components/listing/NearbyListings.tsx
+// src/components/rooms/NearbyRooms.tsx
 import { useRef } from "react";
 import ExperienceCard from "../experiences/ExperienceCard";
 import type { Experience } from "../../types/experience";
@@ -66,7 +66,7 @@ const NEARBY: Experience[] = [
   },
 ];
 
-const NearbyListings = () => {
+const NearbyRooms = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => scrollRef.current?.scrollBy({ left: -240, behavior: "smooth" });
@@ -105,4 +105,4 @@ const NearbyListings = () => {
   );
 };
 
-export default NearbyListings;
+export default NearbyRooms;

@@ -1,8 +1,8 @@
-// src/components/listing/BookingCard.tsx
+// src/components/rooms/BookingCard.tsx
 import { useState } from "react";
 
 interface BookingCardProps {
-  // Dari state ListingDetail
+  // Dari state RoomsDetail
   startDate: number | null;
   endDate: number | null;
   nights: number;
@@ -10,7 +10,7 @@ interface BookingCardProps {
   selecting: "checkin" | "checkout";
   isPromoApplied: boolean;
   guests: number;
-  // Handlers dari ListingDetail
+  // Handlers dari RoomsDetail
   onSelectingChange: (s: "checkin" | "checkout") => void;
   onGuestChange: (n: number) => void;
   onDateClick: () => void; // buat scroll ke kalender
