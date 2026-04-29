@@ -11,7 +11,7 @@ interface ReviewCardProps {
 function StarIcon({ filled = true }: { filled?: boolean }) {
   return (
     <svg
-      className={`w-3 h-3 ${filled ? "text-[#222222]" : "text-[#dddddd]"}`}
+      className={`w-3 h-3 ${filled ? "text-hof" : "text-deco"}`}
       viewBox="0 0 12 12"
       fill="currentColor"
     >
@@ -41,8 +41,8 @@ export function ReviewCard({ review, onClick }: ReviewCardProps) {
           className="w-12 h-12 rounded-full object-cover"
         />
         <div>
-          <h3 className="font-semibold text-[#222222] text-base">{review.userName}</h3>
-          <p className="text-sm text-[#6a6a6a]">{review.userLocation}</p>
+          <h3 className="font-semibold text-hof text-base">{review.userName}</h3>
+          <p className="text-sm text-foggy">{review.userLocation}</p>
         </div>
       </div>
 
@@ -53,17 +53,17 @@ export function ReviewCard({ review, onClick }: ReviewCardProps) {
             <StarIcon key={`star-${review.id}-${i}`} filled={i < review.rating} />
           ))}
         </div>
-        <span className="text-sm text-[#6a6a6a]">{review.date}</span>
+        <span className="text-sm text-foggy">{review.date}</span>
         {review.stayType && (
           <>
-            <span className="text-[#6a6a6a]">·</span>
-            <span className="text-sm text-[#6a6a6a]">{review.stayType}</span>
+            <span className="text-foggy">·</span>
+            <span className="text-sm text-foggy">{review.stayType}</span>
           </>
         )}
       </div>
 
       {/* Comment */}
-      <p className="text-[#222222] leading-relaxed text-base">
+      <p className="text-hof leading-relaxed text-base">
         {displayText}
         {shouldTruncate && !isExpanded && (
           <button
@@ -72,7 +72,7 @@ export function ReviewCard({ review, onClick }: ReviewCardProps) {
               e.stopPropagation();
               setIsExpanded(true);
             }}
-            className="font-semibold underline ml-1 hover:text-[#6a6a6a] transition-colors"
+            className="font-semibold underline ml-1 hover:text-foggy transition-colors"
           >
             Tampilkan lebih banyak
           </button>
@@ -81,12 +81,12 @@ export function ReviewCard({ review, onClick }: ReviewCardProps) {
 
       {/* Host Response */}
       {review.hostResponse && (
-        <div className="mt-4 p-4 bg-[#f7f7f7] rounded-xl">
+        <div className="mt-4 p-4 bg-faint rounded-xl">
           <div className="flex items-center gap-2 mb-2">
-            <span className="font-semibold text-sm text-[#222222]">Respons dari tuan rumah</span>
-            <span className="text-sm text-[#6a6a6a]">{review.hostResponse.date}</span>
+            <span className="font-semibold text-sm text-hof">Respons dari tuan rumah</span>
+            <span className="text-sm text-foggy">{review.hostResponse.date}</span>
           </div>
-          <p className="text-sm text-[#222222] leading-relaxed">
+          <p className="text-sm text-hof leading-relaxed">
             {review.hostResponse.message}
           </p>
         </div>

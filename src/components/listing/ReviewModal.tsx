@@ -23,7 +23,7 @@ function CloseIcon() {
 
 function SearchIcon() {
   return (
-    <svg className="w-4 h-4 text-[#6a6a6a]" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg className="w-4 h-4 text-foggy" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
       <circle cx="7" cy="7" r="5" />
       <path d="M11 11l4 4" />
     </svg>
@@ -110,12 +110,12 @@ export function ReviewModal({
       <div className="relative w-full max-w-2xl max-h-[90vh] bg-white rounded-2xl shadow-xl overflow-hidden animate-scaleIn mx-4">
 
         {/* ── Header ── */}
-        <div className="sticky top-0 z-10 bg-white border-b border-[#ebebeb]">
+        <div className="sticky top-0 z-10 bg-white border-b border-bebe">
           <div className="flex items-center gap-3 px-6 py-4">
             <button
               type="button"
               onClick={onClose}
-              className="p-2 -ml-2 rounded-full hover:bg-[#f7f7f7] transition-colors shrink-0"
+              className="p-2 -ml-2 rounded-full hover:bg-faint transition-colors shrink-0"
             >
               <CloseIcon />
             </button>
@@ -130,8 +130,8 @@ export function ReviewModal({
                     onClick={() => setSelectedTag(selectedTag === tag.id ? tag.id : tag.id)}
                     className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
                       selectedTag === tag.id
-                        ? "bg-[#222222] text-white"
-                        : "bg-[#f7f7f7] text-[#222222] hover:bg-[#ebebeb]"
+                        ? "bg-hof text-white"
+                        : "bg-faint text-hof hover:bg-bebe"
                     }`}
                   >
                     {tag.label}
@@ -149,15 +149,15 @@ export function ReviewModal({
             {isTagView ? (
               /* Tag View: large tag name + count */
               <div>
-                <h2 className="text-2xl font-semibold text-[#222222] mb-1">
+                <h2 className="text-2xl font-semibold text-hof mb-1">
                   {activeTagObj?.label ?? initialSelectedTag?.label}
                 </h2>
-                <p className="text-sm text-[#6a6a6a]">
+                <p className="text-sm text-foggy">
                   {sortedReviews.length} ulasan ·{" "}
                   <button
                     type="button"
                     onClick={onClose}
-                    className="underline hover:text-[#222222] transition-colors"
+                    className="underline hover:text-hof transition-colors"
                   >
                     Pilihan lebih banyak
                   </button>
@@ -170,15 +170,15 @@ export function ReviewModal({
                   <div className="flex flex-col items-center text-center mb-6">
                     <div className="flex items-center gap-1 mb-2">
                       <LaurelLeft />
-                      <span className="text-5xl font-semibold text-[#222222] tracking-tight">
+                      <span className="text-5xl font-semibold text-hof tracking-tight">
                         {summaryData.overallRating.toFixed(2)}
                       </span>
                       <LaurelRight />
                     </div>
                     {summaryData.isGuestFavorite && (
                       <>
-                        <h2 className="text-base font-semibold text-[#222222] mb-1">Pilihan tamu</h2>
-                        <p className="text-xs text-[#6a6a6a] max-w-[220px]">
+                        <h2 className="text-base font-semibold text-hof mb-1">Pilihan tamu</h2>
+                        <p className="text-xs text-foggy max-w-[220px]">
                           Salah satu properti paling dicintai di Airbnb
                         </p>
                       </>
@@ -187,15 +187,15 @@ export function ReviewModal({
                   <div className="grid grid-cols-2 gap-x-8 gap-y-3">
                     {summaryData.ratingBreakdown.map((item) => (
                       <div key={item.category} className="flex items-center justify-between gap-3">
-                        <span className="text-sm text-[#222222] shrink-0">{item.category}</span>
+                        <span className="text-sm text-hof shrink-0">{item.category}</span>
                         <div className="flex items-center gap-2 min-w-0">
-                          <div className="flex-1 h-1 bg-[#dddddd] rounded-full overflow-hidden">
+                          <div className="flex-1 h-1 bg-deco rounded-full overflow-hidden">
                             <div
-                              className="h-full bg-[#222222] rounded-full"
+                              className="h-full bg-hof rounded-full"
                               style={{ width: `${(item.score / 5) * 100}%` }}
                             />
                           </div>
-                          <span className="text-sm font-medium text-[#222222] shrink-0 w-6 text-right">
+                          <span className="text-sm font-medium text-hof shrink-0 w-6 text-right">
                             {item.score.toFixed(1)}
                           </span>
                         </div>
@@ -204,7 +204,7 @@ export function ReviewModal({
                   </div>
                 </div>
 
-                <hr className="border-[#ebebeb]" />
+                <hr className="border-bebe" />
 
                 {/* Search & Sort */}
                 <div className="flex flex-col sm:flex-row gap-3">
@@ -217,13 +217,13 @@ export function ReviewModal({
                       placeholder="Cari ulasan"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-11 pr-4 py-3 border border-[#dddddd] rounded-full text-sm focus:outline-none focus:border-[#222222] focus:ring-1 focus:ring-[#222222] transition-all"
+                      className="w-full pl-11 pr-4 py-3 border border-deco rounded-full text-sm focus:outline-none focus:border-hof focus:ring-1 focus:ring-hof transition-all"
                     />
                   </div>
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="px-4 py-3 border border-[#dddddd] rounded-full text-sm bg-white focus:outline-none focus:border-[#222222] cursor-pointer"
+                    className="px-4 py-3 border border-deco rounded-full text-sm bg-white focus:outline-none focus:border-hof cursor-pointer"
                   >
                     <option value="highest">Rating tertinggi</option>
                     <option value="lowest">Rating terendah</option>
@@ -240,8 +240,8 @@ export function ReviewModal({
                       onClick={() => setSelectedTag(selectedTag === tag.id ? null : tag.id)}
                       className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                         selectedTag === tag.id
-                          ? "bg-[#222222] text-white"
-                          : "bg-[#f7f7f7] text-[#222222] hover:bg-[#ebebeb]"
+                          ? "bg-hof text-white"
+                          : "bg-faint text-hof hover:bg-bebe"
                       }`}
                     >
                       {tag.label}
@@ -249,7 +249,7 @@ export function ReviewModal({
                   ))}
                 </div>
 
-                <h3 className="text-lg font-semibold text-[#222222]">
+                <h3 className="text-lg font-semibold text-hof">
                   {sortedReviews.length} ulasan
                 </h3>
               </>
@@ -258,13 +258,13 @@ export function ReviewModal({
             {/* ── Reviews List ── */}
             <div className="space-y-8">
               {sortedReviews.map((review) => (
-                <div key={review.id} className="pb-8 border-b border-[#ebebeb] last:border-b-0">
+                <div key={review.id} className="pb-8 border-b border-bebe last:border-b-0">
                   <ReviewCard review={review} />
                 </div>
               ))}
               {sortedReviews.length === 0 && (
                 <div className="py-12 text-center">
-                  <p className="text-[#6a6a6a]">Tidak ada ulasan yang ditemukan</p>
+                  <p className="text-foggy">Tidak ada ulasan yang ditemukan</p>
                 </div>
               )}
             </div>

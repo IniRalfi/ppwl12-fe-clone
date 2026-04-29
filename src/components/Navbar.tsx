@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Globe, Menu, Search, User } from "lucide-react";
 import { Logo } from "./Logo";
 import type { ActivePanel } from "../types/search";
@@ -10,7 +10,8 @@ import houseMov from "../assets/house-selected.mov";
 import balloonMov from "../assets/balloon-selected.mov";
 import conciergeMov from "../assets/consierge-selected.mov";
 
-type NavTab = "homes" | "experiences" | "services";
+// Export tipenya biar bisa dipakai di App.tsx
+export type NavTab = "homes" | "experiences" | "services";
 interface NavItem {
   id: NavTab;
   label: string;
@@ -28,10 +29,18 @@ const navItems: NavItem[] = [
 interface NavbarProps {
   isScrolled: boolean;
   onSectionClick: (panel: ActivePanel) => void;
+  activeTab?: NavTab;
+  onTabChange?: (tab: NavTab) => void;
+  isSticky?: boolean; // prop baru, default true
 }
 
-export default function Navbar({ isScrolled, onSectionClick }: NavbarProps) {
-  const [activeTab, setActiveTab] = useState<NavTab>("homes");
+export default function Navbar({
+  isScrolled,
+  onSectionClick,
+  activeTab = "homes",
+  onTabChange,
+  isSticky = true,
+}: NavbarProps) {
   const headerRef = useRef<HTMLElement>(null);
   const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
 
@@ -47,7 +56,7 @@ export default function Navbar({ isScrolled, onSectionClick }: NavbarProps) {
   return (
     <header
       ref={headerRef}
-      className={`sticky top-0 z-50 bg-white transition-all duration-300 ${
+      className={`${isSticky ? "sticky top-0 z-50" : "relative"} bg-white transition-all duration-300 ${
         isScrolled ? "border-b border-[#DDDDDD] shadow-sm" : ""
       }`}
     >
@@ -77,7 +86,7 @@ export default function Navbar({ isScrolled, onSectionClick }: NavbarProps) {
                 <button
                   key={item.id}
                   type="button"
-                  onClick={() => setActiveTab(item.id)}
+                  onClick={() => onTabChange?.(item.id)}
                   onMouseEnter={() => handleMouseEnter(item.id)}
                   onMouseLeave={() => handleMouseLeave(item.id)}
                   className={`group relative flex flex-row items-center gap-2 px-4 h-full border-b-2 transition-colors ${
@@ -192,7 +201,7 @@ export default function Navbar({ isScrolled, onSectionClick }: NavbarProps) {
               <button
                 key={`mob-${item.id}`}
                 type="button"
-                onClick={() => setActiveTab(item.id)}
+                onClick={() => onTabChange?.(item.id)}
                 className={`relative flex-1 flex flex-col items-center border-b-2 transition-colors duration-200 ${
                   isActive ? "text-hof border-hof" : "text-[#717171] border-transparent"
                 }`}
