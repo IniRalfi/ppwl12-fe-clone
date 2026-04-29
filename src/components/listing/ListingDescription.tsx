@@ -44,7 +44,7 @@ const ListingDescription = () => {
       <div className="space-y-4 mb-6">
         {highlights.map((item, i) => (
           <div key={i} className="flex items-start gap-4">
-            <div className="text-gray-700 flex-shrink-0">{item.icon}</div>
+            <div className="text-gray-700 shrink-0">{item.icon}</div>
             <div>
               <p className="font-semibold text-gray-900 text-sm">{item.title}</p>
               <p className="text-gray-500 text-sm">{item.desc}</p>

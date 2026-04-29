@@ -65,7 +65,7 @@ const ListingDetail = () => {
         </div>
 
         {/* Right Column - Sticky Booking Card */}
-        <div className="w-full lg:w-96 flex-shrink-0">
+        <div className="w-full lg:w-96 shrink-0">
           <div className="sticky top-6">
             <BookingCard
               checkIn={checkIn}

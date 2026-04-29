@@ -87,10 +87,10 @@ function RatingChart() {
     <div className="space-y-1.5">
       {ratings.map((rating) => (
         <div key={rating.stars} className="flex items-center gap-2">
-          <span className="text-xs text-[#6a6a6a] w-2">{rating.stars}</span>
-          <div className="flex-1 h-1 bg-[#dddddd] rounded-full overflow-hidden">
+          <span className="text-xs text-foggy w-2">{rating.stars}</span>
+          <div className="flex-1 h-1 bg-deco rounded-full overflow-hidden">
             <div
-              className="h-full bg-[#222222] rounded-full transition-all duration-500"
+              className="h-full bg-hof rounded-full transition-all duration-500"
               style={{ width: `${rating.percentage}%` }}
             />
           </div>
@@ -102,20 +102,20 @@ function RatingChart() {
 
 export function ReviewSummary({ data, onShowAllReviews }: ReviewSummaryProps) {
   return (
-    <div className="py-12 border-t border-[#dddddd]">
+    <div className="py-12 border-t border-deco">
       {/* Guest Favorite Badge */}
       <div className="flex flex-col items-center text-center mb-10">
         <div className="flex items-center gap-1 mb-2">
           <LaurelLeft />
-          <span className="text-6xl font-semibold text-[#222222] tracking-tight">
+          <span className="text-6xl font-semibold text-hof tracking-tight">
             {data.overallRating.toFixed(2)}
           </span>
           <LaurelRight />
         </div>
         {data.isGuestFavorite && (
           <>
-            <h2 className="text-lg font-semibold text-[#222222] mb-1">Pilihan tamu</h2>
-            <p className="text-sm text-[#6a6a6a] max-w-xs">
+            <h2 className="text-lg font-semibold text-hof mb-1">Pilihan tamu</h2>
+            <p className="text-sm text-foggy max-w-xs">
               Salah satu properti paling dicintai di Airbnb berdasarkan rating, ulasan, dan keandalan
             </p>
           </>
@@ -125,8 +125,8 @@ export function ReviewSummary({ data, onShowAllReviews }: ReviewSummaryProps) {
       {/* Rating Breakdown Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 mb-8">
         {/* Overall Rating Chart */}
-        <div className="col-span-2 md:col-span-1 p-4 border-r border-[#dddddd] last:border-r-0">
-          <h3 className="text-sm font-medium text-[#222222] mb-3">Rating keseluruhan</h3>
+        <div className="col-span-2 md:col-span-1 p-4 border-r border-deco last:border-r-0">
+          <h3 className="text-sm font-medium text-hof mb-3">Rating keseluruhan</h3>
           <RatingChart />
         </div>
 
@@ -134,11 +134,11 @@ export function ReviewSummary({ data, onShowAllReviews }: ReviewSummaryProps) {
         {data.ratingBreakdown.map((item, index) => (
           <div
             key={item.category}
-            className={`p-4 ${index < data.ratingBreakdown.length - 1 ? "border-r border-[#dddddd]" : ""}`}
+            className={`p-4 ${index < data.ratingBreakdown.length - 1 ? "border-r border-deco" : ""}`}
           >
-            <h3 className="text-sm font-medium text-[#222222] mb-3">{item.category}</h3>
-            <div className="text-lg font-semibold text-[#222222] mb-2">{item.score.toFixed(1)}</div>
-            <div className="text-[#222222]">
+            <h3 className="text-sm font-medium text-hof mb-3">{item.category}</h3>
+            <div className="text-lg font-semibold text-hof mb-2">{item.score.toFixed(1)}</div>
+            <div className="text-hof">
               <CategoryIcon type={item.icon} />
             </div>
           </div>

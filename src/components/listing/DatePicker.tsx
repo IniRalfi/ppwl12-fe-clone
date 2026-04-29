@@ -44,7 +44,7 @@ const DatePickerSection = ({ checkIn, checkOut, onChange }: DatePickerProps) => 
           rangeColors={["#FF385C"]}
           showDateDisplay={false}
           showMonthAndYearPickers={false}
-          className="!font-sans"
+          className="font-sans!"
         />
       </div>
 

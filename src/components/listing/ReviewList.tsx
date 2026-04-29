@@ -15,7 +15,7 @@ interface ReviewListProps {
 
 function SearchIcon() {
   return (
-    <svg className="w-4 h-4 text-[#6a6a6a]" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg className="w-4 h-4 text-foggy" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
       <circle cx="7" cy="7" r="5" />
       <path d="M11 11l4 4" />
     </svg>
@@ -58,7 +58,7 @@ export function ReviewList({
           placeholder="Cari ulasan"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-11 pr-4 py-3.5 border border-[#dddddd] rounded-full text-sm focus:outline-none focus:border-[#222222] focus:ring-1 focus:ring-[#222222] transition-all"
+          className="w-full pl-11 pr-4 py-3.5 border border-deco rounded-full text-sm focus:outline-none focus:border-hof focus:ring-1 focus:ring-hof transition-all"
         />
       </div>
 
@@ -69,7 +69,7 @@ export function ReviewList({
             key={tag.id}
             type="button"
             onClick={() => handleTagClick(tag)}
-            className="px-4 py-2.5 rounded-full text-sm font-medium transition-all bg-[#f7f7f7] text-[#222222] hover:bg-[#ebebeb]"
+            className="px-4 py-2.5 rounded-full text-sm font-medium transition-all bg-faint text-hof hover:bg-bebe"
           >
             {tag.label}
           </button>
@@ -92,7 +92,7 @@ export function ReviewList({
         <button
           type="button"
           onClick={onShowAllReviews}
-          className="px-6 py-3.5 border border-[#222222] rounded-lg text-base font-semibold text-[#222222] hover:bg-[#f7f7f7] transition-colors"
+          className="px-6 py-3.5 border border-hof rounded-lg text-base font-semibold text-hof hover:bg-faint transition-colors"
         >
           Tampilkan semua {reviews.length} ulasan
         </button>

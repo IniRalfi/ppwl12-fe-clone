@@ -13,13 +13,7 @@ interface BookingCardProps {
 
 const PRICE_PER_NIGHT = 3_432_786;
 
-const BookingCard = ({
-  checkIn,
-  checkOut,
-  guests,
-  onDateClick,
-  onGuestChange,
-}: BookingCardProps) => {
+const BookingCard = ({ checkIn, checkOut, onDateClick, onGuestChange }: BookingCardProps) => {
   const [showGuestPicker, setShowGuestPicker] = useState(false);
   const [dewasa, setDewasa] = useState(1);
   const [anak, setAnak] = useState(0);
@@ -47,7 +41,7 @@ const BookingCard = ({
 
   const nights = Math.max(
     1,
-    Math.round((checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24))
+    Math.round((checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24)),
   );
 
   const subtotal = PRICE_PER_NIGHT * nights;
@@ -213,8 +207,8 @@ const BookingCard = ({
 
           {/* Info */}
           <p className="text-xs text-gray-500 border-t pt-3">
-            Tempat ini mengizinkan jumlah tamu maksimum {MAX_TAMU} orang, tidak termasuk bayi.
-            Hewan peliharaan tidak diizinkan.
+            Tempat ini mengizinkan jumlah tamu maksimum {MAX_TAMU} orang, tidak termasuk bayi. Hewan
+            peliharaan tidak diizinkan.
           </p>
 
           {/* Tutup */}
@@ -230,7 +224,7 @@ const BookingCard = ({
       )}
 
       {/* Pesan Button */}
-      <button className="w-full py-3 rounded-xl font-semibold text-white text-base bg-gradient-to-r from-[#E61E4D] to-[#BD1E59] hover:from-[#D91953] hover:to-[#B0184F] transition-all shadow-md">
+      <button className="w-full py-3 rounded-xl font-semibold text-white text-base bg-linear-to-r from-[#E61E4D] to-[#BD1E59] hover:from-[#D91953] hover:to-[#B0184F] transition-all shadow-md">
         Pesan
       </button>
       <p className="text-center text-sm text-gray-500 mt-2">Anda belum dikenakan biaya</p>
@@ -238,7 +232,9 @@ const BookingCard = ({
       {/* Price Breakdown */}
       <div className="mt-5 space-y-3 text-sm text-gray-700">
         <div className="flex justify-between">
-          <span className="underline">{fmtPrice(PRICE_PER_NIGHT)} × {nights} malam</span>
+          <span className="underline">
+            {fmtPrice(PRICE_PER_NIGHT)} × {nights} malam
+          </span>
           <span>{fmtPrice(subtotal)}</span>
         </div>
         <div className="flex justify-between">
