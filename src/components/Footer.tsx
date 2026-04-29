@@ -1,0 +1,194 @@
+import { Globe, ChevronDown, ChevronRight } from "lucide-react";
+import {
+  inspirationTabs,
+  inspirationData,
+  detailBreadcrumbs,
+  detailNearbyDestinations,
+  detailOtherTypes,
+  footerLinks,
+} from "../data/footerData";
+
+interface FooterProps {
+  type?: "home" | "detail";
+}
+
+export default function Footer({ type = "home" }: FooterProps) {
+  return (
+    <footer className="bg-[#F7F7F7] border-t border-[#DDDDDD] pt-12 mt-12">
+      <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-20">
+        {/* ======================================= */}
+        {/* TOP SECTION (Tergantung props "type") */}
+        {/* ======================================= */}
+
+        {type === "home" ? (
+          <div className="mb-12 border-b border-[#DDDDDD] pb-12">
+            <h2 className="text-[22px] font-semibold text-hof mb-6">
+              Inspirasi untuk liburan mendatang
+            </h2>
+
+            <div className="flex items-center gap-6 border-b border-[#DDDDDD] mb-8 overflow-x-auto no-scrollbar">
+              {inspirationTabs.map((tab, idx) => (
+                <button
+                  key={tab}
+                  className={`pb-4 text-sm whitespace-nowrap transition-colors ${
+                    idx === 0
+                      ? "font-semibold text-hof border-b-2 border-hof"
+                      : "text-[#717171] hover:text-hof"
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-6 gap-x-4">
+              {inspirationData.map((item, idx) => (
+                <div key={idx} className="flex flex-col cursor-pointer group">
+                  <span className="text-sm font-semibold text-hof group-hover:underline">
+                    {item.city}
+                  </span>
+                  <span className="text-sm text-[#717171] group-hover:text-hof">
+                    {item.type}
+                  </span>
+                </div>
+              ))}
+
+              {/* Tampilkan lebih banyak */}
+              <div className="flex items-start mt-0.5 gap-1 cursor-pointer group">
+                <span className="text-sm font-semibold text-hof group-hover:underline leading-none">
+                  Tampilkan lebih banyak
+                </span>
+                <ChevronDown className="w-4 h-4 text-hof group-hover:underline -mt-0.5" />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="mb-12 border-b border-[#DDDDDD] pb-12">
+            {/* Breadcrumbs */}
+            <div className="flex items-center flex-wrap gap-2 mb-10 text-sm text-hof">
+              {detailBreadcrumbs.map((crumb, idx) => (
+                <div key={idx} className="flex items-center gap-2">
+                  <a href="#" className="font-medium hover:underline">
+                    {crumb}
+                  </a>
+                  {idx < detailBreadcrumbs.length - 1 && (
+                    <ChevronRight className="w-3.5 h-3.5 text-hof" />
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Telusuri pilihan lainnya */}
+            <h2 className="text-[22px] font-semibold text-hof mb-6">
+              Telusuri pilihan lainnya di Kuching dan sekitarnya
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-4 mb-12">
+              {detailNearbyDestinations.map((item, idx) => (
+                <div key={idx} className="flex flex-col cursor-pointer group">
+                  <span className="text-sm font-semibold text-hof group-hover:underline">
+                    {item.city}
+                  </span>
+                  <span className="text-sm text-[#717171] group-hover:text-hof">
+                    {item.type}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Tipe penginapan lainnya */}
+            <h2 className="text-[22px] font-semibold text-hof mb-6">
+              Tipe penginapan lainnya di Airbnb
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-4">
+              {detailOtherTypes.map((item, idx) => (
+                <a
+                  key={idx}
+                  href="#"
+                  className="text-sm text-[#717171] hover:text-hof hover:underline truncate"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ======================================= */}
+        {/* MIDDLE SECTION (Shared)                 */}
+        {/* ======================================= */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-12 border-b border-[#DDDDDD]">
+          {Object.values(footerLinks).map((section) => (
+            <div key={section.title}>
+              <h3 className="text-sm font-semibold text-hof mb-4">{section.title}</h3>
+              <ul className="space-y-3">
+                {section.links.map((link) => (
+                  <li key={link}>
+                    <a href="#" className="text-sm text-hof hover:underline">
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ======================================= */}
+      {/* BOTTOM SECTION (Shared)                 */}
+      {/* ======================================= */}
+      <div className="bg-[#F7F7F7]">
+        <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-20 py-6">
+          <div className="flex flex-col-reverse lg:flex-row lg:items-center justify-between gap-4">
+            {/* Copyright & Legal */}
+            <div className="flex items-center flex-wrap gap-2 text-sm text-hof">
+              <span>© 2026 Airbnb, Inc.</span>
+              <span className="hidden md:inline">·</span>
+              <a href="#" className="hover:underline">
+                Privasi
+              </a>
+              <span className="hidden md:inline">·</span>
+              <a href="#" className="hover:underline">
+                Ketentuan
+              </a>
+            </div>
+
+            {/* Config & Sosmed */}
+            <div className="flex items-center flex-wrap gap-6">
+              <div className="flex items-center gap-4">
+                <button className="flex items-center gap-2 text-sm font-semibold text-hof hover:underline">
+                  <Globe className="w-4 h-4" />
+                  Bahasa Indonesia (ID)
+                </button>
+                <button className="text-sm font-semibold text-hof hover:underline">
+                  Rp IDR
+                </button>
+              </div>
+
+              <div className="flex items-center gap-4">
+                {/* Facebook */}
+                <a href="#" className="hover:opacity-70 text-hof" aria-label="Facebook">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg>
+                </a>
+                {/* X (Twitter) */}
+                <a href="#" className="hover:opacity-70 text-hof" aria-label="X (Twitter)">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </a>
+                {/* Instagram */}
+                <a href="#" className="hover:opacity-70 text-hof" aria-label="Instagram">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

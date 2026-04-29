@@ -1,36 +1,57 @@
-import { Logo } from "./components/Logo";
+import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import AppWrapper from "./components/AppWrapper";
+import Navbar from "./components/Navbar";
+import SearchBar from "./components/SearchBar";
+import ComingSoon from "./components/ComingSoon";
+import Footer from "./components/Footer";
+import { useScrolled } from "./hooks/useScrolled";
+import type { ActivePanel } from "./types/search";
 
+// Komponen Testing yang mau kamu buat (import ini nanti setelah file-nya dibuat ya)
+import ComponentTesting from "./pages/ComponentTesting";
+
+// Pisahkan halaman awalmu menjadi function Home
+function Home() {
+  const isScrolled = useScrolled();
+  const [forceExpanded, setForceExpanded] = useState(false);
+  const [triggerPanel, setTriggerPanel] = useState<ActivePanel>(null);
+
+  useEffect(() => {
+    if (!isScrolled) {
+      setForceExpanded(false);
+    }
+  }, [isScrolled]);
+
+  const effectiveScrolled = isScrolled && !forceExpanded;
+
+  const handleCompactClick = (panel: ActivePanel) => {
+    setForceExpanded(true);
+    setTriggerPanel(panel);
+  };
+
+  return (
+    <AppWrapper scale={0.85}>
+      <Navbar isScrolled={effectiveScrolled} onSectionClick={handleCompactClick} />
+      <SearchBar
+        forceExpanded={forceExpanded}
+        triggerPanel={triggerPanel}
+        onPanelTriggered={() => setTriggerPanel(null)}
+        onClose={() => setForceExpanded(false)}
+      />
+      <ComingSoon />
+      <Footer type="home" />
+    </AppWrapper>
+  );
+}
+
+// Gunakan App sebagai Router utama
 function App() {
   return (
-    <main className="min-h-screen bg-white flex flex-col justify-center items-center px-6">
-      {/* Container buat Logo & Text */}
-      <div className="flex flex-col items-center animate-slide-in">
-        {/* Logo Airbnb Besar */}
-        <Logo className="text-rausch w-64 md:w-96 h-auto mb-10 transition-transform hover:scale-105 duration-500" />
-
-        {/* Konten Coming Soon */}
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl md:text-7xl font-bold text-hof tracking-tight">Coming Soon</h1>
-
-          <p className="text-foggy text-lg md:text-2xl max-w-lg mx-auto leading-relaxed">
-            Project clone <span className="font-semibold text-rausch">Airbnb</span> dari{" "}
-            <span className="text-hof font-semibold">Tim 3</span> lagi dalam tahap pengembangan.
-          </p>
-        </div>
-
-        {/* Action Button (Style Airbnb) */}
-        <div className="mt-12 group">
-          <button className="btn-rausch px-10 py-4 rounded-xl text-lg shadow-xl hover:shadow-rausch/20 transition-all active:scale-95">
-            Dapatkan Notifikasi
-          </button>
-        </div>
-      </div>
-
-      {/* Footer Kecil (Opsional) */}
-      <footer className="absolute bottom-8 text-bobo text-sm font-medium">
-        © 2026 PPWL Team 3. All rights reserved.
-      </footer>
-    </main>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/testing" element={<ComponentTesting />} />
+    </Routes>
   );
 }
 

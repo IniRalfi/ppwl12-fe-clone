@@ -1,5 +1,5 @@
 interface LogoProps {
-  className?: string; // Buat nerima class Tailwind dari luar
+  className?: string;
 }
 
 export const Logo = ({ className = "text-rausch w-28 h-auto" }: LogoProps) => {
