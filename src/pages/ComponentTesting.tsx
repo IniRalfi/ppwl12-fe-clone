@@ -10,7 +10,6 @@ import StickyTabs from "../components/listing/StickyTabs";
 
 // --- IMPORT FITUR LISTING DETAIL (BESAR) ---
 import ListingDetail from "../components/listing/ListingDetail";
-// File ini dalemnya ke-export sbg ListingDetail juga, jadi kita alias-in namanya:
 import ImageGalleryComponent from "../components/listing/ImageGallery";
 import { listingImages } from "../data/listingImages";
 
