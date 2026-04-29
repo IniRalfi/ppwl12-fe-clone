@@ -27,9 +27,9 @@ function GuestRow({
   return (
     <div className="flex items-center justify-between py-4 border-b border-[#DDDDDD] last:border-none">
       <div>
-        <p className="text-sm font-semibold text-[#222222]">{label}</p>
+        <p className="text-sm font-semibold text-hof">{label}</p>
         {link ? (
-          <a href="#" className="text-sm text-[#222222] underline">
+          <a href="#" className="text-sm text-hof underline">
             {description}
           </a>
         ) : (
@@ -41,15 +41,15 @@ function GuestRow({
           type="button"
           onClick={onDecrement}
           disabled={value <= min}
-          className="w-8 h-8 rounded-full border border-[#717171] flex items-center justify-center text-[#717171] hover:border-[#222222] hover:text-[#222222] disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-lg"
+          className="w-8 h-8 rounded-full border border-[#717171] flex items-center justify-center text-[#717171] hover:border-hof hover:text-hof disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-lg"
         >
           −
         </button>
-        <span className="w-4 text-center text-sm font-medium text-[#222222]">{value}</span>
+        <span className="w-4 text-center text-sm font-medium text-hof">{value}</span>
         <button
           type="button"
           onClick={onIncrement}
-          className="w-8 h-8 rounded-full border border-[#717171] flex items-center justify-center text-[#717171] hover:border-[#222222] hover:text-[#222222] transition-colors text-lg"
+          className="w-8 h-8 rounded-full border border-[#717171] flex items-center justify-center text-[#717171] hover:border-hof hover:text-hof transition-colors text-lg"
         >
           +
         </button>
