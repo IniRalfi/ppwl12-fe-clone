@@ -1,59 +1,104 @@
 // src/components/listing/DatePicker.tsx
-import { DateRange } from "react-date-range";
-import { addDays } from "date-fns";
-import { id } from "date-fns/locale";
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
 
 interface DatePickerProps {
-  checkIn: Date;
-  checkOut: Date;
-  onChange: (start: Date, end: Date) => void;
+  nights: number;
+  startDate: number | null;
+  endDate: number | null;
+  currentMonthIndex: number;
+  selecting: "checkin" | "checkout";
+  months: string[];
+  onDateClick: (day: number) => void;
+  onClearDates: () => void;
+  onPrevMonth: () => void;
+  onNextMonth: () => void;
+  location?: string; // nama kota buat judul
 }
 
-const DatePickerSection = ({ checkIn, checkOut, onChange }: DatePickerProps) => {
-  const handleSelect = (ranges: any) => {
-    const { selection } = ranges;
-    onChange(selection.startDate, selection.endDate);
-  };
-
+const DatePickerSection = ({
+  nights,
+  startDate,
+  endDate,
+  currentMonthIndex,
+  selecting,
+  months,
+  onDateClick,
+  onClearDates,
+  onPrevMonth,
+  onNextMonth,
+  location = "sini",
+}: DatePickerProps) => {
   return (
     <div className="py-6 border-b border-gray-200">
+      {/* Judul Dinamis */}
       <h2 className="text-xl font-semibold text-gray-900 mb-1">
-        Pilih tanggal menginap
+        {nights > 0 ? `${nights} malam di ${location}` : "Pilih tanggal check-in"}
       </h2>
-      <p className="text-sm text-gray-500 mb-4">
-        Tambahkan tanggal perjalanan untuk harga yang akurat
+      <p className="text-sm text-gray-500 mb-6">
+        {startDate && endDate
+          ? `${startDate} - ${endDate} ${months[currentMonthIndex]} 2026`
+          : "Tambahkan tanggal perjalanan untuk melihat harga yang tepat"}
       </p>
 
-      <div className="overflow-x-auto">
-        <DateRange
-          ranges={[
-            {
-              startDate: checkIn,
-              endDate: checkOut,
-              key: "selection",
-            },
-          ]}
-          onChange={handleSelect}
-          months={2}
-          direction="horizontal"
-          minDate={new Date()}
-          maxDate={addDays(new Date(), 365)}
-          locale={id}
-          rangeColors={["#FF385C"]}
-          showDateDisplay={false}
-          showMonthAndYearPickers={false}
-          className="font-sans!"
-        />
-      </div>
+      <div className="max-w-md">
+        {/* Navigasi Bulan */}
+        <div className="flex justify-between items-center mb-6">
+          <button
+            onClick={onPrevMonth}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <span className="text-lg font-bold">❮</span>
+          </button>
+          <p className="font-semibold text-gray-900 text-base">{months[currentMonthIndex]} 2026</p>
+          <button
+            onClick={onNextMonth}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <span className="text-lg font-bold">❯</span>
+          </button>
+        </div>
 
-      <button
-        onClick={() => onChange(new Date(), addDays(new Date(), 1))}
-        className="mt-2 text-sm font-semibold underline text-gray-800 hover:text-gray-600"
-      >
-        Kosongkan tanggal
-      </button>
+        {/* Header Hari */}
+        <div className="grid grid-cols-7 text-center text-[10px] font-bold text-gray-400 mb-3 uppercase tracking-widest">
+          {["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"].map((d) => (
+            <div key={d}>{d}</div>
+          ))}
+        </div>
+
+        {/* Grid Tanggal */}
+        <div className="grid grid-cols-7 gap-1">
+          {[...Array(31)].map((_, i) => {
+            const day = i + 1;
+            const isSelected = day === startDate || day === endDate;
+            const isInRange = startDate && endDate && day > startDate && day < endDate;
+            const isSelectingStart = selecting === "checkin";
+
+            return (
+              <button
+                key={day}
+                onClick={() => onDateClick(day)}
+                title={isSelectingStart ? "Pilih tanggal check-in" : "Pilih tanggal check-out"}
+                className={`aspect-square flex items-center justify-center text-sm font-semibold transition-all duration-200
+                  ${isSelected ? "bg-black text-white rounded-full shadow-lg" : "rounded-full"}
+                  ${isInRange ? "bg-gray-100 text-black" : ""}
+                  ${!isSelected && !isInRange ? "text-gray-800 hover:bg-gray-100 hover:ring-1 hover:ring-black" : ""}
+                `}
+              >
+                {day}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Clear Button */}
+        <div className="flex justify-end mt-5">
+          <button
+            onClick={onClearDates}
+            className="text-sm font-semibold underline text-gray-800 hover:text-black p-2 transition-colors"
+          >
+            Kosongkan tanggal
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

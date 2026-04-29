@@ -3,7 +3,7 @@
 const HostInfo = () => {
   return (
     <div className="flex items-center gap-4 py-6 border-b border-gray-200">
-      <div className="relative flex-shrink-0">
+      <div className="relative shrink-0">
         <img
           src="https://i.pravatar.cc/56?img=12"
           alt="Host"

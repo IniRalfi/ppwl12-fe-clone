@@ -1,50 +1,31 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import ExperienceCard from "./ExperienceCard";
 import type { CitySection } from "../../types/experience";
 
 interface Props {
+  activeTab: string; // Menerima state tab aktif dari luar (App.tsx)
   homesData: CitySection[];
   experiencesData: CitySection[];
   servicesData: CitySection[];
 }
 
 export default function ExperienceSection({
+  activeTab,
   homesData,
   experiencesData,
   servicesData,
 }: Props) {
-  const [activeTab, setActiveTab] = useState("homes");
-
+  // Gak pake state internal lagi, langsung ambil dari props `activeTab`
   const activeData =
     activeTab === "homes"
       ? homesData
       : activeTab === "experiences"
-      ? experiencesData
-      : servicesData;
+        ? experiencesData
+        : servicesData;
 
   return (
     <div className="py-6 px-4">
-
-      {/* Tab Navigasi */}
-      <div className="flex gap-8 border-b border-gray-200 mb-6">
-        {[
-          { key: "homes", label: "🏠 Homes" },
-          { key: "experiences", label: "🎈 Experiences" },
-          { key: "services", label: "🔔 Services" },
-        ].map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`pb-3 text-sm font-semibold transition-all ${
-              activeTab === tab.key
-                ? "border-b-2 border-black text-black"
-                : "text-gray-400 hover:text-gray-600"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      {/* Tab Navigasi tulisan dihapus karena udah di-handle Navbar di atas */}
 
       {/* 10 Section Per Kota - Scroll ke Bawah */}
       <div className="space-y-10">
@@ -52,7 +33,6 @@ export default function ExperienceSection({
           <CityRow key={citySection.city} citySection={citySection} />
         ))}
       </div>
-
     </div>
   );
 }
@@ -116,9 +96,7 @@ function CityRow({ citySection }: { citySection: CitySection }) {
             <div className="absolute inset-0 bg-black/30" />
           </div>
           <div className="mt-2 px-1">
-            <h3 className="font-semibold text-sm text-gray-900">
-              Lihat semua
-            </h3>
+            <h3 className="font-semibold text-sm text-gray-900">Lihat semua</h3>
           </div>
         </div>
       </div>

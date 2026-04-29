@@ -1,30 +1,46 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, type RefObject } from "react";
 
-export default function StickyTabs() {
-  const [showTabs, setShowTabs] = useState(false)
+interface StickyTabsProps {
+  galleryRef?: RefObject<HTMLDivElement | null>;
+}
+
+export default function StickyTabs({ galleryRef }: StickyTabsProps) {
+  const [showTabs, setShowTabs] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowTabs(window.scrollY > 500)
+    // Kalau ada ref gallery, pakai IntersectionObserver
+    if (galleryRef?.current) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          // StickyTabs muncul pas gallery keluar dari viewport
+          setShowTabs(!entry.isIntersecting);
+        },
+        { threshold: 0, rootMargin: "0px" },
+      );
+      observer.observe(galleryRef.current);
+      return () => observer.disconnect();
     }
 
-    window.addEventListener("scroll", handleScroll)
+    // Fallback: pakai scroll biasa kalau gak ada ref
+    const handleScroll = () => setShowTabs(window.scrollY > 500);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [galleryRef]);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
-
-  if (!showTabs) return null
+  if (!showTabs) return null;
 
   return (
-    <div className="sticky top-0 z-40 bg-white border-b shadow-sm">
-      <div className="max-w-6xl mx-auto flex gap-6 px-6 py-4">
-        <button>Foto</button>
-        <button>Fasilitas</button>
-        <button>Ulasan</button>
-        <button>Lokasi</button>
+    <div className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+      <div className="max-w-6xl mx-auto flex gap-8 px-4 py-5">
+        {["Foto", "Fasilitas", "Ulasan", "Lokasi"].map((tab) => (
+          <button
+            key={tab}
+            className="text-sm font-semibold text-gray-700 hover:text-black pb-1 border-b-2 border-transparent hover:border-black transition-all"
+          >
+            {tab}
+          </button>
+        ))}
       </div>
     </div>
-  )
+  );
 }

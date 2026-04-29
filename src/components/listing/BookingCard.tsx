@@ -1,19 +1,38 @@
 // src/components/listing/BookingCard.tsx
 import { useState } from "react";
-import { format } from "date-fns";
-import { id } from "date-fns/locale";
 
 interface BookingCardProps {
-  checkIn: Date;
-  checkOut: Date;
+  // Dari state ListingDetail
+  startDate: number | null;
+  endDate: number | null;
+  nights: number;
+  currentMonthIndex: number;
+  selecting: "checkin" | "checkout";
+  isPromoApplied: boolean;
   guests: number;
-  onDateClick: () => void;
+  // Handlers dari ListingDetail
+  onSelectingChange: (s: "checkin" | "checkout") => void;
   onGuestChange: (n: number) => void;
+  onDateClick: () => void; // buat scroll ke kalender
+  onAddOneNight: () => void;
 }
 
-const PRICE_PER_NIGHT = 3_432_786;
+const PRICE_PER_NIGHT = 2_885_187;
+const ADD_ON_PRICE = 2_087_561;
 
-const BookingCard = ({ checkIn, checkOut, onDateClick, onGuestChange }: BookingCardProps) => {
+const BookingCard = ({
+  startDate,
+  endDate,
+  nights,
+  currentMonthIndex,
+  selecting,
+  isPromoApplied,
+
+  onSelectingChange,
+  onGuestChange,
+  onDateClick,
+  onAddOneNight,
+}: BookingCardProps) => {
   const [showGuestPicker, setShowGuestPicker] = useState(false);
   const [dewasa, setDewasa] = useState(1);
   const [anak, setAnak] = useState(0);
@@ -22,6 +41,12 @@ const BookingCard = ({ checkIn, checkOut, onDateClick, onGuestChange }: BookingC
 
   const MAX_TAMU = 12;
   const totalTamu = dewasa + anak;
+
+  const subtotal = PRICE_PER_NIGHT * (nights || 1);
+  const serviceFee = Math.round(subtotal * 0.14);
+  const total = subtotal + serviceFee;
+
+  const fmtPrice = (n: number) => `Rp${n.toLocaleString("id-ID")}`;
 
   const updateDewasa = (val: number) => {
     const next = Math.max(1, val);
@@ -39,27 +64,13 @@ const BookingCard = ({ checkIn, checkOut, onDateClick, onGuestChange }: BookingC
     }
   };
 
-  const nights = Math.max(
-    1,
-    Math.round((checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24)),
-  );
-
-  const subtotal = PRICE_PER_NIGHT * nights;
-  const serviceFee = Math.round(subtotal * 0.14);
-  const total = subtotal + serviceFee;
-
-  const fmt = (d: Date) => format(d, "d/M/yyyy", { locale: id });
-  const fmtPrice = (n: number) => `Rp${n.toLocaleString("id-ID")}`;
-
   const guestLabel = () => {
-    const parts = [];
-    parts.push(`${totalTamu} tamu`);
+    const parts = [`${totalTamu} tamu`];
     if (bayi > 0) parts.push(`${bayi} bayi`);
     if (hewan > 0) parts.push(`${hewan} hewan`);
     return parts.join(", ");
   };
 
-  // Counter component
   const Counter = ({
     value,
     onDec,
@@ -93,29 +104,86 @@ const BookingCard = ({ checkIn, checkOut, onDateClick, onGuestChange }: BookingC
   );
 
   return (
-    <div className="border border-gray-300 rounded-2xl p-6 shadow-xl bg-white">
+    <div className="border border-gray-300 rounded-2xl p-6 shadow-xl bg-white space-y-4">
+      {/* Promo Banner */}
+      <div className="bg-faint border border-gray-200 rounded-xl p-4 transition-all duration-500">
+        {!isPromoApplied ? (
+          <div className="flex items-start gap-3">
+            <span className="text-xl">🏷️</span>
+            <div className="text-sm">
+              <p className="font-bold text-gray-900 leading-snug">
+                Tambah satu malam hanya {fmtPrice(ADD_ON_PRICE)}
+              </p>
+              <button
+                onClick={onAddOneNight}
+                className="font-bold underline mt-1.5 block hover:text-rose-600 transition-colors"
+              >
+                Gunakan tawaran
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="flex gap-3 items-center text-sm font-bold text-gray-800">
+            <div className="bg-green-600 text-white rounded-full p-1.5 flex items-center justify-center">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="4"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+            Tawaran berhasil ditambahkan!
+          </div>
+        )}
+      </div>
+
       {/* Price Header */}
-      <div className="mb-4">
+      <div>
         <span className="text-xl font-semibold text-gray-900 underline">
           {fmtPrice(PRICE_PER_NIGHT)}
         </span>
         <span className="text-gray-500 text-sm"> malam</span>
+        {nights > 0 && (
+          <div className="text-sm text-gray-500 mt-1 font-medium underline">
+            Total: {fmtPrice(nights * PRICE_PER_NIGHT)}
+          </div>
+        )}
       </div>
 
       {/* Date & Guest Box */}
-      <div className="border border-gray-300 rounded-xl overflow-visible mb-3">
+      <div className="border border-gray-300 rounded-xl overflow-visible">
         {/* Dates */}
         <div
           className="grid grid-cols-2 divide-x divide-gray-300 cursor-pointer hover:bg-gray-50 rounded-t-xl"
           onClick={onDateClick}
         >
-          <div className="p-3">
+          <div
+            className={`p-3 rounded-tl-xl transition-colors ${selecting === "checkin" ? "bg-gray-100" : ""}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectingChange("checkin");
+              onDateClick();
+            }}
+          >
             <p className="text-xs font-bold text-gray-700 uppercase tracking-wide">Check-in</p>
-            <p className="text-sm text-gray-900">{fmt(checkIn)}</p>
+            <p className="text-sm text-gray-900">
+              {startDate ? `${startDate}/${currentMonthIndex + 1}/26` : "Tambah tanggal"}
+            </p>
           </div>
-          <div className="p-3">
+          <div
+            className={`p-3 rounded-tr-xl transition-colors ${selecting === "checkout" ? "bg-gray-100" : ""}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectingChange("checkout");
+              onDateClick();
+            }}
+          >
             <p className="text-xs font-bold text-gray-700 uppercase tracking-wide">Check-out</p>
-            <p className="text-sm text-gray-900">{fmt(checkOut)}</p>
+            <p className="text-sm text-gray-900">
+              {endDate ? `${endDate}/${currentMonthIndex + 1}/26` : "Tambah tanggal"}
+            </p>
           </div>
         </div>
 
@@ -142,76 +210,62 @@ const BookingCard = ({ checkIn, checkOut, onDateClick, onGuestChange }: BookingC
 
       {/* Guest Picker Dropdown */}
       {showGuestPicker && (
-        <div className="border border-gray-200 rounded-2xl shadow-lg bg-white p-5 mb-3 space-y-5">
-          {/* Dewasa */}
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-semibold text-gray-900 text-sm">Dewasa</p>
-              <p className="text-gray-500 text-xs">Usia 13+</p>
+        <div className="border border-gray-200 rounded-2xl shadow-lg bg-white p-5 space-y-5">
+          {[
+            {
+              label: "Dewasa",
+              sub: "Usia 13+",
+              val: dewasa,
+              dec: () => updateDewasa(dewasa - 1),
+              inc: () => updateDewasa(dewasa + 1),
+              disableDec: dewasa <= 1,
+              disableInc: totalTamu >= MAX_TAMU,
+            },
+            {
+              label: "Anak",
+              sub: "Usia 2–12",
+              val: anak,
+              dec: () => updateAnak(anak - 1),
+              inc: () => updateAnak(anak + 1),
+              disableDec: anak <= 0,
+              disableInc: totalTamu >= MAX_TAMU,
+            },
+            {
+              label: "Bayi",
+              sub: "Di bawah 2 tahun",
+              val: bayi,
+              dec: () => setBayi(Math.max(0, bayi - 1)),
+              inc: () => setBayi(bayi + 1),
+              disableDec: bayi <= 0,
+              disableInc: bayi >= 5,
+            },
+            {
+              label: "Hewan peliharaan",
+              sub: "Membawa hewan pemandu?",
+              val: hewan,
+              dec: () => setHewan(Math.max(0, hewan - 1)),
+              inc: () => setHewan(hewan + 1),
+              disableDec: hewan <= 0,
+              disableInc: hewan >= 5,
+            },
+          ].map((row) => (
+            <div key={row.label} className="flex items-center justify-between">
+              <div>
+                <p className="font-semibold text-gray-900 text-sm">{row.label}</p>
+                <p className="text-gray-500 text-xs">{row.sub}</p>
+              </div>
+              <Counter
+                value={row.val}
+                onDec={row.dec}
+                onInc={row.inc}
+                disableDec={row.disableDec}
+                disableInc={row.disableInc}
+              />
             </div>
-            <Counter
-              value={dewasa}
-              onDec={() => updateDewasa(dewasa - 1)}
-              onInc={() => updateDewasa(dewasa + 1)}
-              disableDec={dewasa <= 1}
-              disableInc={totalTamu >= MAX_TAMU}
-            />
-          </div>
-
-          {/* Anak */}
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-semibold text-gray-900 text-sm">Anak</p>
-              <p className="text-gray-500 text-xs">Usia 2–12</p>
-            </div>
-            <Counter
-              value={anak}
-              onDec={() => updateAnak(anak - 1)}
-              onInc={() => updateAnak(anak + 1)}
-              disableDec={anak <= 0}
-              disableInc={totalTamu >= MAX_TAMU}
-            />
-          </div>
-
-          {/* Bayi */}
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-semibold text-gray-900 text-sm">Bayi</p>
-              <p className="text-gray-500 text-xs">Di bawah 2 tahun</p>
-            </div>
-            <Counter
-              value={bayi}
-              onDec={() => setBayi(Math.max(0, bayi - 1))}
-              onInc={() => setBayi(bayi + 1)}
-              disableDec={bayi <= 0}
-              disableInc={bayi >= 5}
-            />
-          </div>
-
-          {/* Hewan */}
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-semibold text-gray-900 text-sm">Hewan peliharaan</p>
-              <p className="text-gray-500 text-xs underline cursor-pointer">
-                Membawa hewan pemandu?
-              </p>
-            </div>
-            <Counter
-              value={hewan}
-              onDec={() => setHewan(Math.max(0, hewan - 1))}
-              onInc={() => setHewan(hewan + 1)}
-              disableDec={hewan <= 0}
-              disableInc={hewan >= 5}
-            />
-          </div>
-
-          {/* Info */}
+          ))}
           <p className="text-xs text-gray-500 border-t pt-3">
-            Tempat ini mengizinkan jumlah tamu maksimum {MAX_TAMU} orang, tidak termasuk bayi. Hewan
-            peliharaan tidak diizinkan.
+            Tempat ini mengizinkan maksimum {MAX_TAMU} tamu, tidak termasuk bayi.
           </p>
-
-          {/* Tutup */}
           <div className="flex justify-end">
             <button
               onClick={() => setShowGuestPicker(false)}
@@ -224,16 +278,22 @@ const BookingCard = ({ checkIn, checkOut, onDateClick, onGuestChange }: BookingC
       )}
 
       {/* Pesan Button */}
-      <button className="w-full py-3 rounded-xl font-semibold text-white text-base bg-linear-to-r from-[#E61E4D] to-[#BD1E59] hover:from-[#D91953] hover:to-[#B0184F] transition-all shadow-md">
-        Pesan
+      <button
+        className={`w-full py-3 rounded-xl font-semibold text-white text-base transition-all shadow-md ${
+          nights > 0
+            ? "bg-linear-to-r from-[#E61E4D] to-[#BD1E59] hover:from-[#D91953] hover:to-[#B0184F]"
+            : "bg-gray-200 text-gray-400 cursor-not-allowed"
+        }`}
+      >
+        {nights > 0 ? "Pesan" : "Periksa ketersediaan"}
       </button>
-      <p className="text-center text-sm text-gray-500 mt-2">Anda belum dikenakan biaya</p>
+      <p className="text-center text-sm text-gray-500">Anda belum dikenakan biaya</p>
 
       {/* Price Breakdown */}
-      <div className="mt-5 space-y-3 text-sm text-gray-700">
+      <div className="space-y-3 text-sm text-gray-700">
         <div className="flex justify-between">
           <span className="underline">
-            {fmtPrice(PRICE_PER_NIGHT)} × {nights} malam
+            {fmtPrice(PRICE_PER_NIGHT)} × {nights || 1} malam
           </span>
           <span>{fmtPrice(subtotal)}</span>
         </div>
@@ -247,10 +307,26 @@ const BookingCard = ({ checkIn, checkOut, onDateClick, onGuestChange }: BookingC
         </div>
       </div>
 
-      {/* Free Cancel */}
-      <p className="mt-4 text-center text-sm text-gray-500 bg-gray-50 rounded-lg py-2">
+      {/* Promo Banner bawah */}
+      <div className="border border-gray-200 rounded-xl p-4 flex gap-3 bg-white ring-1 ring-black/5">
+        <span className="text-xl text-rose-500">🏷️</span>
+        <div className="text-sm text-gray-700">
+          <p className="font-bold">Harga yang bagus</p>
+          <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
+            Masa inap Anda lebih hemat Rp577.943 dari harga rata-rata.
+          </p>
+        </div>
+      </div>
+
+      <p className="mt-1 text-center text-sm text-gray-500 bg-gray-50 rounded-lg py-2">
         🎉 Pembatalan gratis sebelum 3 Mei
       </p>
+
+      <div className="flex justify-center pt-1">
+        <button className="text-gray-500 flex items-center gap-2 text-sm font-semibold underline">
+          <span>🚩</span> Laporkan iklan ini
+        </button>
+      </div>
     </div>
   );
 };
