@@ -15,14 +15,14 @@ Main Web: https://www.airbnb.co.id/
 
 ## 👥 Tim & Pembagian Tugas
 
-| Name          | NIM         | Reference Page | Spesific Component                                                              |
-| ------------- | ----------- | -------------- | ------------------------------------------------------------------------------- |
-| Rafli Pratama | H1101241008 | Home & Detail  | Navbar (Full), Footer (Full), Integration (Page Layout)                         |
-| Adella        | H1101241036 | Home           | Reusable Card, Listing Section (Homes, Experiences, Services), Layout & Mapping |
-| Bagas         | H110124XXX  | Detail         | Map Section, Host Profile, Extra Info, Nearby Listings                          |
-| Yasmin        | H110124XXX  | Detail         | Image Gallery, Gallery Detail View, Sticky Tabs                                 |
-| Olivia        | H110124XXX  | Detail         | Host Info, Description, Amenities, BookingCard, DatePicker                      |
-| Asa           | H110124XXX  | Detail         | Review Summary, Review List, Review Modal                                       |
+| Name                    | NIM         | Reference Page | Spesific Component                                                              |
+| ----------------------- | ----------- | -------------- | ------------------------------------------------------------------------------- |
+| Rafli Pratama           | H1101241008 | Home & Detail  | Navbar (Full), Footer (Full), Integration (Page Layout)                         |
+| Adella Rheina Sweeta    | H1101241036 | Home           | Reusable Card, Listing Section (Homes, Experiences, Services), Layout & Mapping |
+| Rifa Dwinanda Bagaskara | H1101241023 | Detail         | Map Section, Host Profile, Extra Info, Nearby Listings                          |
+| Tan Atira Yasmin        | H1101241032 | Detail         | Image Gallery, Gallery Detail View, Sticky Tabs                                 |
+| Olivia Naura Fakhradika | H1101241019 | Detail         | Host Info, Description, Amenities, BookingCard, DatePicker                      |
+| Salsabila Nur Anisa     | H1101241026 | Detail         | Review Summary, Review List, Review Modal                                       |
 
 ---
 

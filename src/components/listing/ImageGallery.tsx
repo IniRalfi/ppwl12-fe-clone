@@ -61,7 +61,7 @@ const ImageGallery = forwardRef<HTMLDivElement, ListingImageProps>(function Imag
 
       {/* Modal Fullscreen */}
       {showGallery && (
-        <div className="fixed inset-0 bg-white z-[999] overflow-y-auto">
+        <div className="fixed inset-0 bg-white z-999 overflow-y-auto">
           <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between z-10">
             <button
               onClick={() => setShowGallery(false)}

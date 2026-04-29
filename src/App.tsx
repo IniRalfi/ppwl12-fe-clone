@@ -18,7 +18,7 @@ import { experiencesData } from "./data/experiencesData";
 import { servicesData } from "./data/servicesData";
 
 // --- IMPORT COMPONENT LISTING DETAIL ---
-import ListingDetail from "./components/listing/ListingDetail";
+import ListingDetail from "./components/listing";
 import ImageGalleryComponent from "./components/listing/ImageGallery";
 import { listingImages } from "./data/listingImages";
 import StickyTabs from "./components/listing/StickyTabs";
@@ -46,7 +46,7 @@ function Home() {
   };
 
   return (
-    <AppWrapper scale={0.85}>
+    <AppWrapper scale={0.9}>
       {/* Navbar sekarang mengontrol activeTab */}
       <Navbar
         isScrolled={effectiveScrolled}
@@ -77,8 +77,7 @@ function Home() {
 }
 
 // Halaman Detail Listing
-// Halaman Detail Listing
-// Halaman Detail Listing
+
 function ListingPage() {
   const [forceExpanded, setForceExpanded] = useState(false);
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -87,7 +86,7 @@ function ListingPage() {
   const effectiveScrolled = !forceExpanded;
 
   return (
-    <div className="min-h-screen bg-white font-sans text-hof pb-10">
+    <AppWrapper scale={0.9}>
       <Navbar
         isScrolled={effectiveScrolled}
         onSectionClick={() => setForceExpanded(true)}
@@ -110,7 +109,7 @@ function ListingPage() {
       <div className="mt-16">
         <Footer type="detail" />
       </div>
-    </div>
+    </AppWrapper>
   );
 }
 

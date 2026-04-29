@@ -1,98 +1,44 @@
-// src/components/listing/ListingDetail.tsx
-import { useState, useMemo } from "react";
+// src/components/listing/index.tsx
+import { useListingDetail } from "./useListingDetail";
+import { MONTHS } from "./constants";
+
 import HostInfo from "./HostInfo";
 import ListingDescription from "./ListingDescription";
 import Amenities from "./Amenities";
 import BookingCard from "./BookingCard";
 import DatePickerSection from "./DatePicker";
-
-// --- IMPORT REVIEW ---
 import { ReviewSummary } from "./ReviewSummary";
 import { ReviewList } from "./ReviewList";
 import { ReviewModal } from "./ReviewModal";
-import { reviews, reviewTags, reviewSummaryData } from "../../data/reviewsData";
-import type { Review } from "../../types/review";
+import ListingMap from "./ListingMap";
+import HostProfile from "./HostProfile";
+import ListingInfoExtra from "./ListingInfoExtra";
+import NearbyListings from "./NearbyListings";
 
-const MONTHS = [
-  "Januari",
-  "Februari",
-  "Maret",
-  "April",
-  "Mei",
-  "Juni",
-  "Juli",
-  "Agustus",
-  "September",
-  "Oktober",
-  "November",
-  "Desember",
-];
+import { reviews, reviewTags, reviewSummaryData } from "../../data/reviewsData";
 
 const ListingDetail = () => {
-  // --- STATE TANGGAL (Angka, Bukan Date Object) ---
-  const [startDate, setStartDate] = useState<number | null>(null);
-  const [endDate, setEndDate] = useState<number | null>(null);
-  const [selecting, setSelecting] = useState<"checkin" | "checkout">("checkin");
-  const [currentMonthIndex, setCurrentMonthIndex] = useState(4); // Mei
-  const [isPromoApplied, setIsPromoApplied] = useState(false);
-
-  // --- STATE TAMU ---
-  const [guests, setGuests] = useState(1);
-
-  // --- STATE REVIEW ---
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // --- STATE SCROLL KALENDER ---
-  const [showCalendar, setShowCalendar] = useState(false);
-
-  // Computed
-  const nights = useMemo(() => {
-    if (startDate && endDate) return endDate - startDate;
-    return 0;
-  }, [startDate, endDate]);
-
-  // --- HANDLER TANGGAL ---
-  const handleDateClick = (day: number) => {
-    setIsPromoApplied(false);
-    if (selecting === "checkin") {
-      setStartDate(day);
-      setEndDate(null);
-      setSelecting("checkout");
-    } else {
-      if (startDate && day > startDate) {
-        setEndDate(day);
-        setSelecting("checkin");
-      } else {
-        setStartDate(day);
-        setSelecting("checkout");
-      }
-    }
-  };
-
-  const handleClearDates = () => {
-    setStartDate(null);
-    setEndDate(null);
-    setSelecting("checkin");
-    setIsPromoApplied(false);
-  };
-
-  const handleAddOneNight = () => {
-    if (endDate !== null && endDate < 31) {
-      setEndDate(endDate + 1);
-      setIsPromoApplied(true);
-    }
-  };
-
-  const handleScrollToCalendar = () => {
-    setShowCalendar(true);
-    setTimeout(() => {
-      document.getElementById("date-section")?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-  };
-
-  // --- HANDLER REVIEW ---
-  const handleShowAllReviews = () => setIsModalOpen(true);
-  const handleReviewClick = (review: Review) => console.log("Review diklik:", review.userName);
+  const {
+    startDate,
+    endDate,
+    selecting,
+    currentMonthIndex,
+    isPromoApplied,
+    guests,
+    isModalOpen,
+    showCalendar,
+    nights,
+    setSelecting,
+    setCurrentMonthIndex,
+    setGuests,
+    handleDateClick,
+    handleClearDates,
+    handleAddOneNight,
+    handleScrollToCalendar,
+    handleShowAllReviews,
+    handleCloseModal,
+    handleReviewClick,
+  } = useListingDetail();
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 font-sans">
@@ -126,13 +72,10 @@ const ListingDetail = () => {
 
       {/* Main Layout */}
       <div className="flex flex-col lg:flex-row gap-12 mt-6">
-        {/* Left Column */}
         <div className="flex-1 min-w-0">
           <HostInfo />
           <ListingDescription />
           <Amenities />
-
-          {/* Calendar Section */}
           <div
             id="date-section"
             ref={(el) => {
@@ -155,7 +98,6 @@ const ListingDetail = () => {
           </div>
         </div>
 
-        {/* Right Column - Sticky Booking Card */}
         <div className="w-full lg:w-96 shrink-0">
           <div className="sticky top-28">
             <BookingCard
@@ -175,7 +117,7 @@ const ListingDetail = () => {
         </div>
       </div>
 
-      {/* Reviews Section */}
+      {/* Reviews */}
       <div className="mt-12 pt-12 border-t border-gray-200">
         <ReviewSummary data={reviewSummaryData} onShowAllReviews={handleShowAllReviews} />
         <div className="mt-8">
@@ -189,11 +131,17 @@ const ListingDetail = () => {
         </div>
       </div>
 
-      {/* Review Modal */}
+      {/* Bagian Bagas */}
+      <ListingMap />
+      <HostProfile />
+      <ListingInfoExtra />
+      <NearbyListings />
+
+      {/* Modal Review */}
       {isModalOpen && (
         <ReviewModal
           isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          onClose={handleCloseModal}
           reviews={reviews}
           summaryData={reviewSummaryData}
           tags={reviewTags}
