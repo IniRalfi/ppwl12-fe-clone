@@ -36,18 +36,21 @@ export default function ExperienceCard({ data }: Props) {
         </button>
       </div>
 
-      {/* Teks di BAWAH gambar */}
-      <div className="mt-2 px-1">
-        <h3 className="font-semibold text-sm text-gray-900 truncate">
-          {data.title}
+        {/* Teks di BAWAH gambar */}
+        <div className="mt-2 px-1">
+            <h3 className="font-semibold text-sm text-gray-900 truncate">
+                {data.title}
         </h3>
         <p className="text-xs text-gray-500 truncate">
-          {data.subtitle}
+            {data.subtitle}
         </p>
         <p className="text-xs text-gray-700 mt-1">
-          {data.price} · ★ {data.rating}
+            {data.price}
         </p>
-      </div>
+        <p className="text-xs text-gray-500">
+            ★ {data.rating} dari
+        </p>
+    </div>
 
     </div>
   );
