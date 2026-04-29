@@ -1,12 +1,12 @@
 import { Logo } from "../components/Logo";
 import Navbar from "@/components/Navbar";
-import HostInfo from "@/components/listing/HostInfo";
 import ListingDescription from "@/components/listing/ListingDescription";
 import Amenities from "@/components/listing/Amenities";
 import BookingCard from "@/components/listing/BookingCard";
 import DatePickerSection from "@/components/listing/DatePicker";
 import { useState } from "react";
 import { addDays } from "date-fns";
+
 
 export default function ComponentTesting() {
   const [checkIn, setCheckIn] = useState(addDays(new Date(), 10));
@@ -16,27 +16,26 @@ export default function ComponentTesting() {
   return (
     <div className="min-h-screen bg-gray-50 p-8 space-y-12">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">🛠️ Component Testing Playground</h1>
-        <p className="text-gray-600 mt-2">
-          Tempat untuk tes dan melihat render spesifik tiap komponen. Teman-teman bisa nambahin
-          komponen miliknya di bawah ini ya!
-        </p>
+        <h1 className="text-3xl font-bold text-gray-800">
+          🛠️ Component Testing Playground
+        </h1>
       </div>
 
-      {/* 1. Test Logo */}
       <section className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-        <h2 className="text-xl font-semibold mb-4 pb-2 border-b">1. Logo Component</h2>
-        <div className="p-4 bg-gray-100 rounded-lg flex items-center justify-center">
-          <Logo />
-        </div>
+        <h2 className="text-xl font-semibold mb-4 pb-2 border-b">
+          1. Logo Component
+        </h2>
+        <Logo />
       </section>
 
-      {/* 2. Navbar */}
       <section className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-        <h2 className="text-xl font-semibold mb-4 pb-2 border-b">2. Navbar Component</h2>
-        <div className="bg-white rounded-lg border">
-          <Navbar isScrolled={false} onSectionClick={() => console.log("Section Clicked!")} />
-        </div>
+        <h2 className="text-xl font-semibold mb-4 pb-2 border-b">
+          2. Navbar
+        </h2>
+        <Navbar
+          isScrolled={false}
+          onSectionClick={() => console.log("Section Clicked!")}
+        />
       </section>
 
       {/* 3. HostInfo */}
