@@ -1,11 +1,26 @@
+# Paksa MIME type yang benar untuk file JS/CSS/aset modern
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
+  AddType text/css .css
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+# Set header caching untuk aset statis
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  RewriteRule ^index\.html$ - [L]
+  # Jangan redirect file atau direktori yang benar-benar ada
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
 
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-
-  RewriteRule . /index.html [L]
+  # Semua route lain → index.html (untuk SPA routing)
+  RewriteRule ^ /index.html [L]
 </IfModule>
