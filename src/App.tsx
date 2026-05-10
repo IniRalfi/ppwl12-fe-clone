@@ -17,6 +17,9 @@ import { homesData } from "./data/homesData";
 import { experiencesData } from "./data/experiencesData";
 import { servicesData } from "./data/servicesData";
 
+// --- IMPORT HOST SERVICES PAGE (DITAMBAHKAN) ---
+import HostServicesPage from "./pages/HostServicesPage";
+
 // --- IMPORT COMPONENT ROOMS DETAIL ---
 import RoomsDetail from "./components/rooms";
 import ImageGalleryComponent from "./components/rooms/ImageGallery";
@@ -77,7 +80,6 @@ function Home() {
 }
 
 // Halaman Detail Rooms
-
 function RoomsPage() {
   const [forceExpanded, setForceExpanded] = useState(false);
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -119,6 +121,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/rooms/:id" element={<RoomsPage />} />
+      {/* ROUTE BARU UNTUK HOST SERVICES */}
+      <Route path="/host/services" element={<HostServicesPage />} />
     </Routes>
   );
 }
