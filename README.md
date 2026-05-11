@@ -15,17 +15,14 @@ Kelas Praktikum Pemrograman Web Lanjut 2026 (Sistem Informasi / UNTAN) — Mingg
 
 ## 👥 Tim & Pembagian Tugas
 
-## 👥 Tim & Pembagian Tugas
-
 | Nama                    | NIM          | Referensi Halaman | Komponen |
 | ----------------------- | ------------ | ----------------- | --------- |
-| Rafli Pratama           | H1101241008  | `airbnb.co.id/` & `airbnb.co.id/rooms/:id` | `Navbar.tsx`, `Footer.tsx`, `AppWrapper.tsx`, `SearchBar/*`, Integration & Page Layout |
-| Adella Rheina Sweeta    | H1101241036  | `airbnb.co.id/` | `experiences/ExperienceCard.tsx`, `experiences/ExperienceSection.tsx` |
-| Rifa Dwinanda Bagaskara | H1101241023  | `airbnb.co.id/host/services` | `rooms/RoomsMap.tsx`, `rooms/HostProfile.tsx`, `rooms/RoomsInfoExtra.tsx`, `rooms/NearbyRooms.tsx` |
-| Tan Atira Yasmin        | H1101241032  | `airbnb.co.id/rooms/:id` | `rooms/ImageGallery.tsx`, `rooms/StickyTabs.tsx` |
-| Olivia Naura Fakhradika | H1101241019  | `airbnb.co.id/rooms/:id` | `rooms/HostInfo.tsx`, `rooms/RoomsDescription.tsx`, `rooms/Amenities.tsx`, `rooms/BookingCard.tsx`, `rooms/DatePicker.tsx` |
-| Salsabila Nur Anisa     | H1101241026  | `airbnb.co.id/rooms/:id` | `rooms/ReviewSummary.tsx`, `rooms/ReviewList.tsx`, `rooms/ReviewModal.tsx`, `rooms/ReviewCard.tsx` |
-
+| Rafli Pratama           | H1101241008  | [Home](https://www.airbnb.co.id/) & [Rooms Detail](https://www.airbnb.co.id/rooms/1380232605919031155?check_in=2026-05-22&check_out=2026-05-24&photo_id=2110947891&source_impression_id=p3_1778470327_P3AE0VadbvBaeCtT&previous_page_section_name=1000) | `Navbar.tsx`, `Footer.tsx`, `AppWrapper.tsx`, Integrasi Layout Halaman |
+| Adella Rheina Sweeta    | H1101241036  | [Home](https://www.airbnb.co.id/) | `experiences/ExperienceCard.tsx`, `experiences/ExperienceSection.tsx` |
+| Rifa Dwinanda Bagaskara | H1101241023  | [Host Services](https://www.airbnb.co.id/host/services) | `rooms/RoomsMap.tsx`, `rooms/HostProfile.tsx`, `rooms/RoomsInfoExtra.tsx`, `rooms/NearbyRooms.tsx` |
+| Tan Atira Yasmin        | H1101241032  | [Rooms Detail](https://www.airbnb.co.id/rooms/1380232605919031155?check_in=2026-05-22&check_out=2026-05-24&photo_id=2110947891&source_impression_id=p3_1778470327_P3AE0VadbvBaeCtT&previous_page_section_name=1000) | `rooms/ImageGallery.tsx`, `rooms/StickyTabs.tsx` |
+| Olivia Naura Fakhradika | H1101241019  | [Rooms Detail](https://www.airbnb.co.id/rooms/1380232605919031155?check_in=2026-05-22&check_out=2026-05-24&photo_id=2110947891&source_impression_id=p3_1778470327_P3AE0VadbvBaeCtT&previous_page_section_name=1000) | `rooms/HostInfo.tsx`, `rooms/RoomsDescription.tsx`, `rooms/Amenities.tsx`, `rooms/BookingCard.tsx`, `rooms/DatePicker.tsx` |
+| Salsabila Nur Anisa     | H1101241026  | [Rooms Detail](https://www.airbnb.co.id/rooms/1380232605919031155?check_in=2026-05-22&check_out=2026-05-24&photo_id=2110947891&source_impression_id=p3_1778470327_P3AE0VadbvBaeCtT&previous_page_section_name=1000) | `rooms/ReviewSummary.tsx`, `rooms/ReviewList.tsx`, `rooms/ReviewModal.tsx`, `rooms/ReviewCard.tsx` |
 ---
 
 ## 🧩 Pembagian Halaman
