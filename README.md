@@ -15,14 +15,16 @@ Kelas Praktikum Pemrograman Web Lanjut 2026 (Sistem Informasi / UNTAN) — Mingg
 
 ## 👥 Tim & Pembagian Tugas
 
-| Nama                    | NIM          | Halaman       | Komponen                                                                        |
-| ----------------------- | ------------ | ------------- | ------------------------------------------------------------------------------- |
-| Rafli Pratama           | H1101241008  | Home & Detail | Navbar (Full), Footer (Full), Integration & Page Layout                         |
-| Adella Rheina Sweeta    | H1101241036  | Home          | Reusable Card, Rooms Section (Homes, Experiences, Services), Layout & Mapping   |
-| Rifa Dwinanda Bagaskara | H1101241023  | Detail        | Map Section, Host Profile, Extra Info, Nearby Rooms                             |
-| Tan Atira Yasmin        | H1101241032  | Detail        | Image Gallery, Gallery Detail View, Sticky Tabs                                 |
-| Olivia Naura Fakhradika | H1101241019  | Detail        | Host Info, Description, Amenities, Booking Card, Date Picker                    |
-| Salsabila Nur Anisa     | H1101241026  | Detail        | Review Summary, Review List, Review Modal                                       |
+## 👥 Tim & Pembagian Tugas
+
+| Nama                    | NIM          | Referensi Halaman | Komponen |
+| ----------------------- | ------------ | ----------------- | --------- |
+| Rafli Pratama           | H1101241008  | `airbnb.co.id/` & `airbnb.co.id/rooms/:id` | `Navbar.tsx`, `Footer.tsx`, `AppWrapper.tsx`, `SearchBar/*`, Integration & Page Layout |
+| Adella Rheina Sweeta    | H1101241036  | `airbnb.co.id/` | `experiences/ExperienceCard.tsx`, `experiences/ExperienceSection.tsx` |
+| Rifa Dwinanda Bagaskara | H1101241023  | `airbnb.co.id/host/services` | `rooms/RoomsMap.tsx`, `rooms/HostProfile.tsx`, `rooms/RoomsInfoExtra.tsx`, `rooms/NearbyRooms.tsx` |
+| Tan Atira Yasmin        | H1101241032  | `airbnb.co.id/rooms/:id` | `rooms/ImageGallery.tsx`, `rooms/StickyTabs.tsx` |
+| Olivia Naura Fakhradika | H1101241019  | `airbnb.co.id/rooms/:id` | `rooms/HostInfo.tsx`, `rooms/RoomsDescription.tsx`, `rooms/Amenities.tsx`, `rooms/BookingCard.tsx`, `rooms/DatePicker.tsx` |
+| Salsabila Nur Anisa     | H1101241026  | `airbnb.co.id/rooms/:id` | `rooms/ReviewSummary.tsx`, `rooms/ReviewList.tsx`, `rooms/ReviewModal.tsx`, `rooms/ReviewCard.tsx` |
 
 ---
 
